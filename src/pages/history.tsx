@@ -19,9 +19,7 @@ export default function History() {
         <MenuListSkeleton />
       ) : orders ? (
         <OrderList orderlist={orders} />
-      ) : (
-        <div>There are no orders</div>
-      )}
+      ) : null}
     </LayoutWithBottomNav>
   );
 }
