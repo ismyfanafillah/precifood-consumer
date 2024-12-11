@@ -24,6 +24,8 @@ export default function Home() {
   const { data: recommendation, errorMessage } = useGetRecommendations();
   const isRecommendationUpdated = useRecommendationUpdate(recommendation);
 
+  console.log(recommendation);
+
   return (
     <LayoutWithBottomNav>
       {/* Header Background */}
@@ -90,10 +92,10 @@ export default function Home() {
       </div>
 
       <div>
-        {recommendation ? (
+        {recommendation && recommendation.recommendations ? (
           <RecommendationList
             recommendationlist={recommendation.recommendations}
-          />
+          /> 
         ) : (
           <MenuListSkeleton />
         )}
