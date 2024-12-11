@@ -66,7 +66,7 @@ export default function ChangePasswordDialog() {
           onClick={() => setOpen(true)}
           variant="contained"
           color="secondary"
-          className="h-10 px-3 text-xs text-primary"
+          className="h-10 px-3 text-xs text-white"
         >
           Ganti Password
         </Button>
