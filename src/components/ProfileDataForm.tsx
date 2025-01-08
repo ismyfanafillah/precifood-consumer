@@ -30,10 +30,10 @@ export default function ProfileDataForm({
         required
         disabled
         id="name"
-        label="Name"
+        label="Nama"
         size="small"
         className="w-full"
-        placeholder="Enter Name"
+        placeholder="Masukkan Nama"
         value={profile?.personal_information.name || ""}
         slotProps={{
           inputLabel: {
@@ -43,13 +43,13 @@ export default function ProfileDataForm({
       />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
-          label="Date of Birth"
+          label="Tanggal Lahir"
           disabled
           value={profile ? dayjs(profile.personal_information.birth) : null}
           slotProps={{
             textField: {
               size: "small",
-              placeholder: "Enter Date of Birth",
+              placeholder: "Masukkan Tanggal Lahir",
               required: true,
             },
           }}
@@ -61,14 +61,14 @@ export default function ProfileDataForm({
         select
         required
         disabled
-        label="Gender"
+        label="Jenis Kelamin"
         size="small"
         className="w-full"
         value={profile?.personal_information.sex || ""}
         key={profile?.personal_information.sex}
       >
         <MenuItem value="">
-          <em>Select Gender</em>
+          <em>Pilih Jenis Kelamin</em>
         </MenuItem>
         <MenuItem value="Laki-laki">Laki-laki</MenuItem>
         <MenuItem value="Perempuan">Perempuan</MenuItem>
@@ -79,7 +79,7 @@ export default function ProfileDataForm({
         })}
         required
         id="weight"
-        label="Weight"
+        label="Berat Badan (kg)"
         type="number"
         size="small"
         className="w-full"
@@ -99,11 +99,11 @@ export default function ProfileDataForm({
         })}
         required
         id="height"
-        label="Height"
+        label="Tinggi Badan (cm)"
         type="number"
         size="small"
         className="w-full"
-        placeholder="Enter Height"
+        placeholder="Masukkan Tinggi Badan"
         error={!!errors.height}
         helperText={errors.height?.message}
         value={watch("height") || ""}
@@ -117,11 +117,11 @@ export default function ProfileDataForm({
         {...register("phone")}
         required
         id="phone-number"
-        label="Phone Number"
+        label="Nomor Telepon"
         type="tel"
         size="small"
         className="w-full"
-        placeholder="Enter Phone Number"
+        placeholder="Masukkan Nomor Telepon"
         error={!!errors.phone}
         helperText={errors.phone?.message}
         value={watch("phone") || ""}
@@ -135,7 +135,7 @@ export default function ProfileDataForm({
         select
         {...register("medical_history")}
         required
-        label="Medical Condition"
+        label="Riwayat Penyakit"
         size="small"
         className="w-full"
         error={!!errors.medical_history}
@@ -143,7 +143,7 @@ export default function ProfileDataForm({
         value={watch("medical_history") || ""}
       >
         <MenuItem value="">
-          <em>Select Medical Condition</em>
+          <em>Pilih Kondisi Riwayat Penyakit</em>
         </MenuItem>
         <MenuItem value="no_history">Tidak Ada</MenuItem>
         <MenuItem value="cardiovascular">Jantung Koroner/Kolesterol</MenuItem>

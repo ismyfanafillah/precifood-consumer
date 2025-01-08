@@ -114,7 +114,7 @@ export default function ChangeEmailDialog({
             {...register("password")}
             required
             id="password"
-            label="Password"
+            label="Kata sandi"
             size="small"
             type="password"
             className="w-full"
@@ -123,7 +123,7 @@ export default function ChangeEmailDialog({
         </DialogContent>
         <DialogActions className="justify-center pb-8 pt-0">
           <Button onClick={handleUpdate} variant="contained">
-            Update
+            Simpan
           </Button>
         </DialogActions>
       </Dialog>

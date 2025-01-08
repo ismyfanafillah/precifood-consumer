@@ -7,7 +7,13 @@ import SuccessOrderDialogContent from "@/components/order/SuccessOrderDialogCont
 import { SuccessOrder } from "@/interfaces/order";
 import { postDataAuthenticated } from "@/utils/http";
 
-export default function InfoSuccessOrderDialog({ id }: { id: number }) {
+export default function InfoSuccessOrderDialog({
+  id,
+  closeRecommendationDialog,
+}: {
+  id: number;
+  closeRecommendationDialog: () => void;
+}) {
   const [open, setOpen] = useState(false);
   const [success, setSuccess] = useState<SuccessOrder | null>(null);
   const orderFetched = useRef(false);
@@ -37,6 +43,7 @@ export default function InfoSuccessOrderDialog({ id }: { id: number }) {
 
   const handleClose = () => {
     setOpen(false);
+    closeRecommendationDialog();
   };
 
   return (
@@ -50,7 +57,15 @@ export default function InfoSuccessOrderDialog({ id }: { id: number }) {
         Order
       </Button>
 
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+      <Dialog
+        open={open}
+        onClose={() => {
+          handleClose();
+          setOpen(false);
+        }}
+        fullWidth
+        maxWidth="sm"
+      >
         {success ? <SuccessOrderDialogContent success={success} /> : null}
       </Dialog>
     </div>

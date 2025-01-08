@@ -26,7 +26,7 @@ export function LogoutButton() {
         color="error"
         className="rounded-full"
       >
-        Logout
+        Keluar
       </Button>
     </div>
   );

@@ -49,7 +49,7 @@ export default function Register() {
   return (
     <div className="p-8 pb-24 space-y-5">
       <div className="mb-4 text-center">
-        <h1 className="text-2xl font-bold">Registration</h1>
+        <h1 className="text-2xl font-bold">Daftar Akun</h1>
         <hr className="border-t-2 border-primary mt-2" />
       </div>
       <div className="flex flex-wrap gap-4">
@@ -57,23 +57,23 @@ export default function Register() {
           {...register("name")}
           required
           id="name"
-          label="Name"
+          label="Nama"
           className="w-full"
           size="small"
-          placeholder="Enter Name"
+          placeholder="Masukkan Nama"
           error={!!errors.name}
           helperText={errors.name?.message}
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
-            label="Date of Birth"
+            label="Tanggal Lahir"
             onChange={handleDateChange}
             slotProps={{
               textField: {
                 error: !!errors.birth,
                 size: "small",
                 helperText: errors.birth?.message,
-                placeholder: "Enter Date of Birth",
+                placeholder: "Masukkan Tanggal Lahir",
                 required: true,
               },
             }}
@@ -84,7 +84,7 @@ export default function Register() {
           select
           {...register("sex")}
           required
-          label="Gender"
+          label="Jenis Kelamin"
           className="w-full"
           size="small"
           error={!!errors.sex}
@@ -92,7 +92,7 @@ export default function Register() {
           value={watch("sex") || ""}
         >
           <MenuItem value="">
-            <em>Select Gender</em>
+            <em>Pilih Jenis Kelamin</em>
           </MenuItem>
           <MenuItem value="Laki-laki">Laki-laki</MenuItem>
           <MenuItem value="Perempuan">Perempuan</MenuItem>
@@ -103,11 +103,11 @@ export default function Register() {
           })}
           required
           id="weight"
-          label="Weight"
+          label="Berat Badan (kg)"
           type="number"
           className="w-full"
           size="small"
-          placeholder="Enter Weight"
+          placeholder="Masukkan Berat Badan"
           error={!!errors.weight}
           helperText={errors.weight?.message}
         />
@@ -117,11 +117,11 @@ export default function Register() {
           })}
           required
           id="height"
-          label="Height"
+          label="Tinggi Badan (cm)"
           type="number"
           className="w-full"
           size="small"
-          placeholder="Enter Height"
+          placeholder="Mausukkan Tinggi Badan"
           error={!!errors.height}
           helperText={errors.height?.message}
         />
@@ -133,7 +133,7 @@ export default function Register() {
           type="email"
           className="w-full"
           size="small"
-          placeholder="Enter Email"
+          placeholder="Masukkan Email"
           error={!!errors.email}
           helperText={errors.email?.message}
         />
@@ -141,11 +141,11 @@ export default function Register() {
           {...register("phone")}
           required
           id="phone-number"
-          label="Phone Number"
+          label="Nomor Telepon"
           type="tel"
           className="w-full"
           size="small"
-          placeholder="Enter Phone Number"
+          placeholder="Masukkan Nomor Telepon"
           error={!!errors.phone}
           helperText={errors.phone?.message}
         />
@@ -153,11 +153,11 @@ export default function Register() {
           {...register("password")}
           required
           id="password"
-          label="Password"
+          label="Kata Sandi"
           type="password"
           className="w-full"
           size="small"
-          placeholder="Enter Password"
+          placeholder="Masukkan Kata Sandi"
           error={!!errors.password}
           helperText={errors.password?.message}
         />
@@ -165,11 +165,11 @@ export default function Register() {
           {...register("password_confirmation")}
           required
           id="confirm-password"
-          label="Confirm Password"
+          label="Konfirmasi Kata Sandi"
           type="password"
           className="w-full"
           size="small"
-          placeholder="Enter Confirm Password"
+          placeholder="Masukkan Konfirmasi Kata Sandi"
           error={!!errors.password_confirmation}
           helperText={errors.password_confirmation?.message}
         />
@@ -177,7 +177,7 @@ export default function Register() {
           select
           {...register("medical_history")}
           required
-          label="Medical Condition"
+          label="Riwayat Penyakit"
           className="w-full"
           size="small"
           error={!!errors.medical_history}
@@ -185,7 +185,7 @@ export default function Register() {
           value={watch("medical_history") || ""}
         >
           <MenuItem value="">
-            <em>Select Medical Condition</em>
+            <em>Pilih Riwayat Penyakit</em>
           </MenuItem>
           <MenuItem value="no_history">Tidak Ada</MenuItem>
           <MenuItem value="cardiovascular">Jantung Koroner/Kolesterol</MenuItem>
@@ -194,13 +194,13 @@ export default function Register() {
         </TextField>
       </div>
       <Button size="small" variant="contained" onClick={signup}>
-        Sign Up
+          Daftar
       </Button>
       {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
       <p>
-        Have an account?{" "}
+        Sudah memiliki akun?{" "}
         <Link href="/login" className="text-primary font-semibold">
-          Login
+          Masuk
         </Link>
       </p>
     </div>

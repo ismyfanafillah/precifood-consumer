@@ -5,12 +5,14 @@ import { openConfirmationDialog } from "./ConfirmationDialog";
 import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  IconButton,
   MenuItem,
   TextField,
 } from "@mui/material";
@@ -76,22 +78,30 @@ export default function UpdateDataDialog() {
 
   return (
     <Dialog onClose={() => setOpen(false)} open={open}>
-      <DialogTitle>
+      <DialogTitle className="relative">
         <div className="mb-1 text-center">
-          <h3 className="text-xl font-bold">Update Data</h3>
+          <h3 className="text-xl font-bold">Perbarui Data</h3>
           <hr className="border-t-2 border-primary mt-1" />
         </div>
+        <IconButton
+          aria-label="close"
+          onClick={() => setOpen(false)}
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+        >
+          <CloseIcon />
+        </IconButton>
       </DialogTitle>
+
       <DialogContent className="py-0 mb-1">
         <p className="italic text-center mb-1">
-          Apakah anda ingin melakukan update data berikut?
+          Apakah anda ingin melakukan memperbarui data berikut?
         </p>
         <TextField
           {...register("weight", {
             setValueAs: (value) => +value,
           })}
           required
-          label="Weight"
+          label="Berat Badan"
           type="number"
           name="weight"
           variant="outlined"
@@ -109,7 +119,8 @@ export default function UpdateDataDialog() {
           {...register("height", {
             setValueAs: (value) => +value,
           })}
-          label="Height"
+          required
+          label="Tinggi Badan"
           name="height"
           type="number"
           variant="outlined"
@@ -127,7 +138,7 @@ export default function UpdateDataDialog() {
           select
           {...register("medical_history")}
           required
-          label="Medical Condition"
+          label="Riwayat Penyakit"
           name="medical_history"
           fullWidth
           margin="dense"
@@ -153,7 +164,7 @@ export default function UpdateDataDialog() {
       </DialogContent>
       <DialogActions className="px-7 mb-2">
         <Button onClick={handleUpdate} variant="contained">
-          Update
+          Simpan
         </Button>
       </DialogActions>
     </Dialog>
