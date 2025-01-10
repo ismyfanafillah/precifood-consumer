@@ -53,7 +53,7 @@ export function ConfirmationDialog() {
       <DialogContent>
         <DialogContentText>{description}</DialogContentText>
       </DialogContent>
-      <DialogActions>
+      <DialogActions className="pb-8 pt-0 px-6">
         <Button onClick={() => handleClose(false)}>Batal</Button>
         <Button variant="contained" onClick={() => handleClose(true)}>
           Ya

@@ -1,21 +1,14 @@
 import { Dialog, DialogContent, DialogActions, Divider, Typography, Button } from "@mui/material";
 import { SuccessOrder } from "@/interfaces/order";
-import React from "react";
+import React, {useState} from "react";
 
 export default function SuccessOrderDialogContent({
   success
 }: {
   success: SuccessOrder;
-  // closeRecommendationDialog: () => void;
 }) {
   console.log(success);
-  const [open, setOpen] = React.useState(true);
-
-  const onClose = () => {
-    setOpen(false);
-    // closeRecommendationDialog();
-
-  }
+  const [open, setOpen] = useState(true);
 
   return (
     <>
@@ -55,7 +48,7 @@ export default function SuccessOrderDialogContent({
       </DialogContent>
 
       <DialogActions className="justify-center mb-2">
-        <Button variant="contained" className="rounded-3xl" onClick={onClose}>
+        <Button variant="contained" className="rounded-3xl" onClick={() => setOpen(false)}>
           OK
         </Button>
       </DialogActions>

@@ -11,7 +11,7 @@ export default function History() {
   return (
     <LayoutWithBottomNav>
       <div className="mb-4 text-center">
-        <h1 className="text-2xl font-bold">Riwayat Pemesanan</h1>
+        <h1 className="text-2xl font-bold">Riwayat Pesanan</h1>
         <hr className="border-t-2 border-primary mt-2" />
       </div>
       {errorMessage && <Alert severity="error">{errorMessage}</Alert>}

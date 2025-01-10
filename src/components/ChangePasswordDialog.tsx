@@ -92,7 +92,6 @@ export default function ChangePasswordDialog() {
             margin="dense"
             error={!!errors.old_password}
             helperText={errors.old_password?.message}
-
           />
           <TextField
             {...register("new_password")}
@@ -121,8 +120,9 @@ export default function ChangePasswordDialog() {
             helperText={errors.password_confirmation?.message}
           />
         </DialogContent>
-        <DialogActions className="justify-center pb-8 pt-0">
-          <Button onClick={handleUpdate} variant="contained">
+        <DialogActions className="pb-8 pt-0 px-6">
+          <Button onClick={() => setOpen(false)}>Batal</Button>
+          <Button variant="contained" onClick={handleUpdate}>
             Simpan
           </Button>
         </DialogActions>
