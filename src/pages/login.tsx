@@ -91,7 +91,7 @@ export default function Login() {
           >
             PreciFood
           </Typography>
-          <Typography variant="body1" color="white" className="mt-2">
+          <Typography variant="body1" color="white" className="mt-2 italic">
             For Specific Restaurant
           </Typography>
         </div>
@@ -103,14 +103,14 @@ export default function Login() {
               color="primary"
               className="mt-2 text-center font-bold"
             >
-              Welcome back!
+              Selamat datang kembali!
             </Typography>
             <Typography
               variant="body1"
               color="primary"
               className="mb-2 text-center"
             >
-              Please login to continue.
+              Silakan masuk untuk melanjutkan.
             </Typography>
             <div className="mb-4">
               <TextField
@@ -121,7 +121,7 @@ export default function Login() {
                 size="small"
                 type="email"
                 className="w-full"
-                placeholder="Enter Email"
+                placeholder="Masukkan Email"
                 error={!!errors.email}
                 helperText={errors.email?.message}
               />
@@ -131,11 +131,11 @@ export default function Login() {
                 {...register("password")}
                 required
                 id="password"
-                label="Password"
+                label="Kata Sandi"
                 size="small"
                 type="password"
                 className="w-full"
-                placeholder="Enter Password"
+                placeholder="Masukkan Kata Sandi"
                 error={!!errors.password}
                 helperText={errors.password?.message}
               />
@@ -146,7 +146,7 @@ export default function Login() {
               className="w-full py-2 mt-4"
               size="large"
             >
-              Login
+              Masuk
             </Button>
           </form>
 
@@ -156,9 +156,9 @@ export default function Login() {
             </Alert>
           )}
           <p className="mt-4 text-center">
-            Don’t have an account?{" "}
+            Belum memiliki akun?{" "}
             <Link href="/register" className="text-primary font-semibold">
-              Sign Up
+              Daftar
             </Link>
           </p>
         </div>
