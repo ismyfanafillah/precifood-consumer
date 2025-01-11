@@ -1,6 +1,6 @@
-import { Dialog, DialogContent, DialogActions, Divider, Typography, Button } from "@mui/material";
+import { DialogContent, Divider, Typography } from "@mui/material";
 import { SuccessOrder } from "@/interfaces/order";
-import React, {useState} from "react";
+import React from "react";
 
 export default function SuccessOrderDialogContent({
   success
@@ -8,11 +8,9 @@ export default function SuccessOrderDialogContent({
   success: SuccessOrder;
 }) {
   console.log(success);
-  const [open, setOpen] = useState(true);
 
   return (
     <>
-    <Dialog onClose={() => setOpen(false)} open={open}>
       <DialogContent className="space-y-4">
         <Typography
           variant="h6"
@@ -46,13 +44,6 @@ export default function SuccessOrderDialogContent({
           Silakan sampaikan pesanan kepada waitress.
         </Typography>
       </DialogContent>
-
-      <DialogActions className="justify-center mb-2">
-        <Button variant="contained" className="rounded-3xl" onClick={() => setOpen(false)}>
-          OK
-        </Button>
-      </DialogActions>
-    </Dialog>
     </>
   );
 }

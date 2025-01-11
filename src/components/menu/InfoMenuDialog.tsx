@@ -1,6 +1,8 @@
 import { useCallback, useRef, useState } from "react";
+import React from "react";
 
-import { Button, Dialog } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { Button, Dialog, IconButton } from "@mui/material";
 
 import MenuDialogContent from "@/components/menu/MenuDialogContent";
 import { Menu } from "@/interfaces/menu";
@@ -47,6 +49,13 @@ export default function InfoMenuDialog({ id }: { id: number }) {
       </Button>
 
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+        <IconButton
+          aria-label="close"
+          onClick={() => setOpen(false)}
+          className="absolute top-3 right-4 text-gray-500 hover:text-gray-800"
+        >
+          <CloseIcon />
+        </IconButton>
         {menu ? <MenuDialogContent menu={menu} /> : null}
       </Dialog>
     </div>

@@ -1,6 +1,8 @@
 import { useCallback, useRef, useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 
-import { Button, Dialog } from "@mui/material";
+
+import { Button, Dialog, DialogTitle, IconButton, Typography } from "@mui/material";
 
 import RecommendationDialogContent from "@/components/recommendation/RecommendationDialogContent";
 import { Recommendation } from "@/interfaces/menu";
@@ -55,12 +57,28 @@ export default function InfoRecommendationDialog({
       </Button>
 
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+      <DialogTitle className="relative py-4 px-6">
+        <Typography
+          variant="h6"
+          className="text-xl text-center font-semibold text-gray-800"
+        >
+          {`Menu Rekomendasi ${rank}`}
+        </Typography>
+        <IconButton
+          aria-label="close"
+          onClick={() => setOpen(false)}
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+        >
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
         {recommendation ? (
           <RecommendationDialogContent
             recommendation={recommendation}
             rank={rank}
             id={id}
             nutrition_summary={recommendation.nutrition_summary}
+            setOpen={setOpen}
           />
         ) : null}
       </Dialog>

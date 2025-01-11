@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 
-import { Button, Dialog } from "@mui/material";
+import { Button, Dialog, DialogActions } from "@mui/material";
 
 import { openConfirmationDialog } from "@/components/ConfirmationDialog";
 import SuccessOrderDialogContent from "@/components/order/SuccessOrderDialogContent";
@@ -67,6 +67,15 @@ export default function InfoSuccessOrderDialog({
         maxWidth="sm"
       >
         {success ? <SuccessOrderDialogContent success={success} /> : null}
+        <DialogActions className="justify-center mb-2">
+          <Button
+            variant="contained"
+            className="rounded-3xl"
+            onClick={handleClose}
+          >
+            OK
+          </Button>
+        </DialogActions>
       </Dialog>
     </div>
   );

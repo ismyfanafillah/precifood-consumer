@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 
-import { Button, Dialog } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { Button, Dialog, IconButton } from "@mui/material";
 
 import OrderDialogContent from "@/components/order/OrderDialogContent";
 import { Order } from "@/interfaces/order";
@@ -56,6 +57,13 @@ export default function InfoOrderDialog({
       </Button>
 
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+        >
+          <CloseIcon />
+        </IconButton>
         {order ? (
           <OrderDialogContent order={order} onDelete={handleDelete} />
         ) : null}

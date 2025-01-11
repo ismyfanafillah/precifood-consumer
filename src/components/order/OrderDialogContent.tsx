@@ -3,15 +3,7 @@ import React from "react";
 
 import { openToast } from "../Toast";
 
-import CloseIcon from "@mui/icons-material/Close";
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  Divider,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Button, DialogContent, Divider, Typography } from "@mui/material";
 
 import { Order } from "@/interfaces/order";
 import { deleteDataAuthenticated } from "@/utils/http";
@@ -24,7 +16,6 @@ export default function OrderDialogContent({
   order: Order;
   onDelete: () => void;
 }) {
-  const [open, setOpen] = useState(true);
   const [isCancelDisabled, setIsCancelDisabled] = useState(true);
 
   useEffect(() => {
@@ -60,83 +51,74 @@ export default function OrderDialogContent({
   };
 
   return (
-    <Dialog onClose={() => setOpen(false)} open={open}>
-      <DialogContent>
-        <Typography
-          variant="h6"
-          className="font-semibold text-lg text-gray-800 mb-2"
-        >
-          {order.restaurant_name}
-        </Typography>
-        <IconButton
-          aria-label="close"
-          onClick={() => setOpen(false)}
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
-        >
-          <CloseIcon />
-        </IconButton>
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          className="text-sm text-gray-500"
-        >
-          {formatDate(order.ordered_at)}
-        </Typography>
+    <DialogContent>
+      <Typography
+        variant="h6"
+        className="font-semibold text-lg text-gray-800 mb-2"
+      >
+        {order.restaurant_name}
+      </Typography>
+      <Typography
+        variant="body2"
+        color="textSecondary"
+        className="text-sm text-gray-500"
+      >
+        {formatDate(order.ordered_at)}
+      </Typography>
 
-        {order.order_detail.map((orderDetail) => (
-          <div
-            key={orderDetail.id}
-            className="mb-4 p-2 rounded-lg bg-gray-50 shadow-sm"
+      {order.order_detail.map((orderDetail) => (
+        <div
+          key={orderDetail.id}
+          className="mb-4 p-2 rounded-lg bg-gray-50 shadow-sm"
+        >
+          <Typography
+            variant="subtitle1"
+            component="div"
+            className="flex justify-between items-center text-gray-700 text-lg w-full"
           >
-            <Typography
-              variant="subtitle1"
-              component="div"
-              className="flex justify-between items-center text-gray-700 text-lg w-full"
-            >
-              <span className="mr-4 flex-1">{orderDetail.menu_name}</span>
-              <span className="ml-4 whitespace-nowrap">
-                Rp{orderDetail.menu_price.toLocaleString("id-ID")}
-              </span>
-            </Typography>
-
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              className="text-sm text-gray-600"
-            >
-              Porsi untuk: {orderDetail.menu_portion} orang
-            </Typography>
-          </div>
-        ))}
-
-        <Divider className="my-4" />
-
-        <div className="flex justify-between items-center mt-4">
-          <Typography variant="body1" className="text-gray-800 font-semibold">
-            Total Harga: Rp{order.total_price.toLocaleString("id-ID")}
+            <span className="mr-4 flex-1">{orderDetail.menu_name}</span>
+            <span className="ml-4 whitespace-nowrap">
+              Rp{orderDetail.menu_price.toLocaleString("id-ID")}
+            </span>
           </Typography>
-        </div>
 
-        <Button
-          variant="contained"
-          color="error"
-          disabled={isCancelDisabled}
-          onClick={deleteOrder}
-          className="mt-4 w-full"
-        >
-          Batalkan Pesanan
-        </Button>
-
-        {isCancelDisabled && (
           <Typography
             variant="body2"
             color="textSecondary"
-            className="mt-2 text-center text-sm text-gray-500 italic"
+            className="text-sm text-gray-600"
           >
-            Pesanan yang sudah melewati 1 jam tidak dapat dibatalkan
+            Porsi untuk: {orderDetail.menu_portion} orang
           </Typography>
-        )}
-      </DialogContent>
-    </Dialog>
+        </div>
+      ))}
+
+      <Divider className="my-4" />
+
+      <div className="flex justify-between items-center mt-4">
+        <Typography variant="body1" className="text-gray-800 font-semibold">
+          Total Harga: Rp{order.total_price.toLocaleString("id-ID")}
+        </Typography>
+      </div>
+
+      <Button
+        variant="contained"
+        color="error"
+        disabled={isCancelDisabled}
+        onClick={deleteOrder}
+        className="mt-4 w-full"
+      >
+        Batalkan Pesanan
+      </Button>
+
+      {isCancelDisabled && (
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          className="mt-2 text-center text-sm text-gray-500 italic"
+        >
+          Pesanan yang sudah melewati 1 jam tidak dapat dibatalkan
+        </Typography>
+      )}
+    </DialogContent>
   );
 }

@@ -1,14 +1,10 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Carousel from "react-material-ui-carousel";
 
 import Image from "next/image";
 
-import CloseIcon from "@mui/icons-material/Close";
 import {
-  Dialog,
   DialogContent,
-  DialogTitle,
-  IconButton,
   Typography,
 } from "@mui/material";
 
@@ -20,33 +16,15 @@ export default function RecommendationDialogContent({
   rank,
   id,
   nutrition_summary,
+  setOpen,
 }: {
   recommendation: Recommendation;
   rank: number;
   id: number;
   nutrition_summary: NutritionSummary;
+  setOpen: Dispatch<SetStateAction<boolean>>
 }) {
-  const [open, setOpen] = React.useState(true);
-
   return (
-    <Dialog onClose={() => setOpen(false)} open={open}>
-      <DialogTitle className="relative py-4 px-6">
-        <Typography
-          variant="h6"
-          className="text-xl text-center font-semibold text-gray-800"
-        >
-          {`Menu Rekomendasi ${rank}`}
-        </Typography>
-        <IconButton
-          aria-label="close"
-          onClick={() => setOpen(false)}
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
-        >
-          <CloseIcon />
-        </IconButton>
-      </DialogTitle>
-
-      {/* Dialog Content */}
       <DialogContent className="space-y-6">
         {/* Carousel */}
         <Carousel
@@ -138,13 +116,11 @@ export default function RecommendationDialogContent({
             Total Harga: Rp
             {recommendation.total_price.toLocaleString("id-ID")}
           </Typography>
-          {/* <InfoSuccessOrderDialog id={id} /> */}
           <InfoSuccessOrderDialog
             id={id}
             closeRecommendationDialog={() => setOpen(false)}
           />
         </div>
       </DialogContent>
-    </Dialog>
   );
 }
