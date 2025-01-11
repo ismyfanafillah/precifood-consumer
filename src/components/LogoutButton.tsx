@@ -11,7 +11,7 @@ export function LogoutButton() {
 
   const logout = async () => {
     const confirmation = await openConfirmationDialog({
-      title: "Konfirmasi Logout",
+      title: "Konfirmasi Keluar Akun",
       description: "Apakah Anda yakin ingin keluar dari aplikasi?",
     });
     if (!confirmation) return;

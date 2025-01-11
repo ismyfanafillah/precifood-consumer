@@ -2,7 +2,8 @@ import Carousel from "react-material-ui-carousel";
 
 import Image from "next/image";
 
-import { Alert, Typography } from "@mui/material";
+import InfoIcon from "@mui/icons-material/Info";
+import { Alert, AlertTitle, IconButton, Link, Typography } from "@mui/material";
 
 import LayoutWithBottomNav from "@/components/LayoutWithBottomNav";
 import UpdateDataDialog from "@/components/UpdateDataDialog";
@@ -28,9 +29,22 @@ export default function Home() {
 
   return (
     <LayoutWithBottomNav>
-      {/* Header Background */}
       <div className="w-full h-auto">
         <div className="absolute top-0 left-0 w-full h-60 bg-primary shadow-md"></div>
+        <div className="absolute top-4 right-4">
+          <Link href="/information">
+            <IconButton
+              aria-label="Information"
+              className="bg-white p-0 hover:text-secondary active:text-secondary transition-colors duration-300"
+            >
+              <InfoIcon
+                fontSize="medium"
+                className="text-primary hover:text-secondary active:text-secondary transition-colors duration-300"
+              />
+            </IconButton>
+          </Link>
+        </div>
+
         <div className="relative text-center">
           <h1 className="text-3xl font-bold text-white">PreciFood</h1>
           <p className="text-secondary text-xs italic">
@@ -40,6 +54,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Carousel */}
       <div>
         <Carousel indicators={false} navButtonsAlwaysInvisible>
           {images.map((img, index) => (
@@ -76,13 +91,31 @@ export default function Home() {
             Proses rekomendasi gagal: {recommendation.status.generator_error}
           </Alert>
         )}
+
+        {!recommendation?.recommendations?.length &&
+          !recommendation?.status.is_generating && (
+            <Alert severity="info">
+              <AlertTitle className="text-info">
+                Belum Ada Rekomendasi
+              </AlertTitle>
+              <div className="italic">
+                Anda belum memiliki list rekomendasi. <br />
+                Silahkan buat rekomendasi baru untuk memulai.
+              </div>
+            </Alert>
+          )}
+
         {recommendation?.status.is_generating &&
           recommendation.status.generator_error === null && (
-            <Alert severity="info">Sedang generate...</Alert>
+            <Alert severity="info">
+              Sedang generate... <br /> Harap tunggu beberapa saat.
+            </Alert>
           )}
-        {isRecommendationUpdated && (
+
+        {isRecommendationUpdated && !recommendation?.status.is_generating && (
           <Alert severity="success">Rekomendasi telah diperbarui</Alert>
         )}
+
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
       </div>
 
@@ -92,13 +125,21 @@ export default function Home() {
       </div>
 
       <div>
-        {recommendation && recommendation.recommendations ? (
-          <RecommendationList
-            recommendationlist={recommendation.recommendations}
-          /> 
-        ) : (
-          <MenuListSkeleton />
+        {/* Skeleton Placeholder Jika Sedang Generating */}
+        {recommendation?.status.is_generating && (
+          <div>
+            <MenuListSkeleton />
+          </div>
         )}
+
+        {/* Menampilkan Recommendation List Hanya Jika Tidak Generating */}
+        {!recommendation?.status.is_generating &&
+          recommendation &&
+          recommendation.recommendations?.length > 0 && (
+            <RecommendationList
+              recommendationlist={recommendation.recommendations}
+            />
+          )}
       </div>
     </LayoutWithBottomNav>
   );
