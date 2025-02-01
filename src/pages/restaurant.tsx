@@ -1,8 +1,11 @@
 import { Card, CardContent, Typography } from "@mui/material";
 
 import LayoutWithBottomNav from "@/components/LayoutWithBottomNav";
+// import { Restaurant } from "@/interfaces/restaurant";
+import { useGetRestaurantProfile } from "@/hooks/useGetData";
 
-export default function Restaurants() {
+export default function Restaurant() {
+  const { data: restaurant_profile } = useGetRestaurantProfile();
   return (
     <LayoutWithBottomNav>
       <div className="mb-4 text-center">
@@ -17,7 +20,7 @@ export default function Restaurants() {
                 variant="subtitle1"
                 className="font-bold text-gray-800"
               >
-                Restoran Karimata
+                {restaurant_profile?.contact.name}
               </Typography>
               <Typography variant="body2" className="text-gray-500 italic">
                 (dipilih)
@@ -26,10 +29,13 @@ export default function Restaurants() {
 
             <div className="mb-6">
               <Typography variant="subtitle2" className="text-gray-700">
-                <strong>Email:</strong> info@restorankarimata.com
+                <strong>Email:</strong> {restaurant_profile?.contact.email}
               </Typography>
               <Typography variant="subtitle2" className="text-gray-700">
-                <strong>Contact:</strong> 021-29468156 / 081295099174
+                <strong>Contact:</strong> {restaurant_profile?.contact.phone}
+              </Typography>
+              <Typography variant="subtitle2" className="text-gray-700">
+                <strong>Address:</strong> {restaurant_profile?.address.address_detail}
               </Typography>
             </div>
           </CardContent>

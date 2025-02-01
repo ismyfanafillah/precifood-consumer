@@ -3,12 +3,13 @@ import { openToast } from "../Toast";
 import { Button } from "@mui/material";
 
 import { postDataAuthenticated } from "@/utils/http";
+import { getCookies } from "@/utils/cookie";
 
 export function GenerateRecommendationButton() {
   const generateRecommendation = async () => {
     try {
       await postDataAuthenticated(
-        `/restaurants/${process.env.NEXT_PUBLIC_RESTAURANT_ID}/recommendations`,
+        `/restaurants/${getCookies("restaurant_id")}/recommendations`,
       );
       openToast({
         type: "success",

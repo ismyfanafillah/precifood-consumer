@@ -7,6 +7,7 @@ import { Button, Dialog, IconButton } from "@mui/material";
 import MenuDialogContent from "@/components/menu/MenuDialogContent";
 import { Menu } from "@/interfaces/menu";
 import { getDataAuthenticated } from "@/utils/http";
+import { getCookies } from "@/utils/cookie";
 
 export default function InfoMenuDialog({ id }: { id: number }) {
   const [open, setOpen] = useState(false);
@@ -17,7 +18,7 @@ export default function InfoMenuDialog({ id }: { id: number }) {
     try {
       if (menuFetched.current) return;
       const data = await getDataAuthenticated(
-        `/restaurants/${process.env.NEXT_PUBLIC_RESTAURANT_ID}/menus/${id}`,
+        `/restaurants/${getCookies("restaurant_id")}/menus/${id}`,
       );
       setMenu(data);
       menuFetched.current = true;

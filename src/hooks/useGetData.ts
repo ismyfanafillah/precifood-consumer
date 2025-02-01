@@ -6,13 +6,17 @@ import {
   GET_ORDERS,
   GET_RECOMMENDATIONS,
   PROFILE,
+  GET_RESTAURANTS,
+  GET_RESTAURANT_PROFILE,
+  Endpoint,
 } from "@/constants/endpoint";
 import { IndexRecommendation, Menu } from "@/interfaces/menu";
 import { SimpleOrder } from "@/interfaces/order";
 import { getDataAuthenticated } from "@/utils/http";
 import { Profile } from "@/interfaces/profile";
+import { Restaurant, ListRestaurant } from "@/interfaces/restaurant";
 
-function useFetchData<T>(endpoint: string) {
+function useFetchData<T>(endpoint: Endpoint) {
   const [data, setData] = useState<T | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +24,7 @@ function useFetchData<T>(endpoint: string) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getDataAuthenticated(endpoint);
+        const response = await getDataAuthenticated(endpoint());
         setData(response);
       } catch (error: unknown) {
         if (error instanceof Error) {
@@ -43,3 +47,8 @@ export const useGetRecommendations = () =>
   useFetchData<IndexRecommendation>(GET_RECOMMENDATIONS);
 export const useGetMenus = () => useFetchData<Menu[]>(GET_MENUS);
 export const useGetProfile = () => useFetchData<Profile>(PROFILE);
+export const useGetRestaurants = () => useFetchData<ListRestaurant[]>(GET_RESTAURANTS);
+export const useGetRestaurantProfile = () => useFetchData<Restaurant>(GET_RESTAURANT_PROFILE);
+
+// export const GET_RECOMMENDATIONS: Endpoint = () => `/restaurants/${getCookies("restaurant_id")}/recommendations`;
+// export const GET_RECOMMENDATIONS = `/restaurants/${getCookies("restaurant_id")}/recommendations`;

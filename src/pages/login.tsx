@@ -8,11 +8,19 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Alert, Button, Link, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Link,
+  MenuItem,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 import { setCookie } from "@/utils/cookie";
 import { postData } from "@/utils/http";
 import { LoginSchema } from "@/validations/auth";
+import { useGetRestaurants } from "@/hooks/useGetData";
 
 const image = [
   "/images/image1.png",
@@ -24,6 +32,7 @@ const image = [
 
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { data: restaurants } = useGetRestaurants();
   const router = useRouter();
 
   const loginForm = useForm<z.infer<typeof LoginSchema>>({
@@ -33,6 +42,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = loginForm;
 
@@ -40,6 +50,7 @@ export default function Login() {
     try {
       const responseData = await postData("/auth/login", data);
       setCookie("token", responseData.access_token);
+      setCookie("restaurant_id", data.restaurant_id);
       router.push("/");
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -140,6 +151,27 @@ export default function Login() {
                 helperText={errors.password?.message}
               />
             </div>
+            <TextField
+              select
+              {...register("restaurant_id")}
+              required
+              label="Restaurants"
+              className="w-full"
+              size="small"
+              error={!!errors.restaurant_id}
+              helperText={errors.restaurant_id?.message}
+              value={watch("restaurant_id") || ""}
+            >
+              <MenuItem value="">
+                <em>Pilih Restoran</em>
+              </MenuItem>
+              {restaurants?.map((restaurant) => (
+                <MenuItem key={restaurant.id} value={restaurant.id}>
+                  {restaurant.name}
+                </MenuItem>
+              ))}
+              {/* <MenuItem value="R-0192c857-35e6-7cc2-98da-46f0faf6f651">Restoran Karimata</MenuItem> */}
+            </TextField>
             <Button
               variant="contained"
               type="submit"

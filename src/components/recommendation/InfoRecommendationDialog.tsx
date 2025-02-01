@@ -7,6 +7,7 @@ import { Button, Dialog, DialogTitle, IconButton, Typography } from "@mui/materi
 import RecommendationDialogContent from "@/components/recommendation/RecommendationDialogContent";
 import { Recommendation } from "@/interfaces/menu";
 import { getDataAuthenticated } from "@/utils/http";
+import { getCookies } from "@/utils/cookie";
 
 export default function InfoRecommendationDialog({
   id,
@@ -25,7 +26,7 @@ export default function InfoRecommendationDialog({
     try {
       if (recommendationFetched.current) return;
       const data = await getDataAuthenticated(
-        `/restaurants/${process.env.NEXT_PUBLIC_RESTAURANT_ID}/recommendations/${id}`,
+        `/restaurants/${getCookies("restaurant_id")}/recommendations/${id}`,
       );
       setRecommendation(data);
       recommendationFetched.current = true;

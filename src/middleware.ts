@@ -14,7 +14,11 @@ function isTokenExpired(token: string): boolean {
   }
 }
 
-export function middleware(request: NextRequest) {
+export function middleware(request: NextRequest) {  
+  if (request.nextUrl.pathname === "/") {
+    return NextResponse.next();
+  }
+
   const token = request.cookies.get("token")?.value;
 
   if (!token || isTokenExpired(token)) {

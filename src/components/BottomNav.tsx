@@ -14,7 +14,7 @@ import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const routeToValue: { [key: string]: number } = {
-  "/restaurants": 0,
+  "/restaurant": 0,
   "/menus": 1,
   "/": 2,
   "/history": 3,
@@ -54,7 +54,7 @@ export default function BottomNav() {
           <BottomNavigationAction
             icon={<RestaurantMenuIcon />}
             component={Link}
-            href="/restaurants"
+            href="/restaurant"
             className="text-secondary"
           />
           <BottomNavigationAction

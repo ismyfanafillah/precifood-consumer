@@ -1,6 +1,13 @@
-export const GET_ORDERS = `/consumers/orders`;
-export const GET_RECOMMENDATIONS = `/restaurants/${process.env.NEXT_PUBLIC_RESTAURANT_ID}/recommendations`;
-export const GET_MENUS = `/restaurants/${process.env.NEXT_PUBLIC_RESTAURANT_ID}/menus`;
-export const SEARCH_MENUS = (query: string) =>
-  `/restaurants/${process.env.NEXT_PUBLIC_RESTAURANT_ID}/menus/search?name=${query}`;
-export const PROFILE = `/users/consumers/profile`;
+import { getCookies } from "@/utils/cookie";
+
+export type Endpoint = (query?: string) => string;
+
+export const GET_ORDERS: Endpoint = () => `/consumers/orders`;
+export const PROFILE: Endpoint = () => `/users/consumers/profile`;
+export const GET_RESTAURANTS: Endpoint = () => `/list/restaurant`;
+export const GET_RECOMMENDATIONS: Endpoint = () => `/restaurants/${getCookies("restaurant_id")}/recommendations`;
+export const GET_MENUS: Endpoint = () => `/restaurants/${getCookies("restaurant_id")}/menus`;
+export const GET_RESTAURANT_PROFILE: Endpoint = () => `/users/restaurants/${getCookies("restaurant_id")}`;
+export const SEARCH_MENUS: Endpoint = (query?: string) => `/restaurants/${getCookies("restaurant_id")}/menus/search?name=${query}`;
+
+// export const GET_RECOMMENDATIONS = `/restaurants/${getCookies("restaurant_id")}/recommendations`;

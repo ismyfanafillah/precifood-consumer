@@ -22,3 +22,8 @@ export interface Address {
   image_url: string;
   province: string;
 }
+
+export interface ListRestaurant {
+  name: string;
+  id: string;
+}
