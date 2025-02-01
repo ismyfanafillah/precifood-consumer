@@ -1,5 +1,3 @@
-// "use client";
-
 import Carousel from "react-material-ui-carousel";
 
 import Image from "next/image";
@@ -16,13 +14,13 @@ export default function LandingPage() {
         "Temukan rekomendasi menu terbaik untuk restoran favorit Anda!",
     },
     {
-      image: "/images/makan.svg",
+      image: "/images/opt-makan.png",
       title: "Manfaat PreciFood",
       description:
         "Dapatkan rekomendasi menu yang sesuai dengan selera Anda berdasarkan preferensi dan ulasan pengguna lain.",
     },
     {
-      image: "/images/mobile2.svg",
+      image: "/images/mobile2.png",
       title: "Cara Menggunakan",
       description:
         "Cukup daftar atau login, pilih restoran, dan dapatkan rekomendasi terbaik!",
@@ -33,7 +31,26 @@ export default function LandingPage() {
     <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center bg-gray-100">
       <div className="max-w-md w-full">
         {/* Carousel / Slider */}
-        <Carousel indicators={false} navButtonsAlwaysVisible>
+        <Carousel indicators={false} navButtonsAlwaysInvisible>
+          {slides.map((img, index) => (
+            <div
+              key={index}
+              className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden rounded-lg shadow-lg"
+            >
+              <Image
+                src={img.image}
+                alt={`Foto ${index + 1}`}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-l"
+              />
+
+              <h2 className="text-2xl font-bold mt-4">{img.title}</h2>
+              <p className="text-gray-700 text-sm mt-2">{img.description}</p>
+            </div>
+          ))}
+        </Carousel>
+        {/* <Carousel indicators={false} navButtonsAlwaysVisible>
           {slides.map((slide, index) => (
             <div key={index} className="flex flex-col items-center p-6">
               <div className="relative w-64 h-64">
@@ -51,7 +68,7 @@ export default function LandingPage() {
               <p className="text-gray-700 text-sm mt-2">{slide.description}</p>
             </div>
           ))}
-        </Carousel>
+        </Carousel> */}
 
         {/* Tombol Register & Login */}
         <div className="mt-6 flex justify-center space-x-4">
@@ -76,7 +93,6 @@ export default function LandingPage() {
     </div>
   );
 }
-
 
 // "use client";
 
