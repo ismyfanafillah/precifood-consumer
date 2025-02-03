@@ -8,7 +8,7 @@ import { Menu } from "@/interfaces/menu";
 
 export default function MenuDialogContent({ menu }: { menu: Menu }) {
   return (
-    <DialogContent className="space-y-6">
+    (<DialogContent className="space-y-6">
       <Typography
         variant="h6"
         className="text-xl text-center font-semibold text-gray-800"
@@ -23,18 +23,18 @@ export default function MenuDialogContent({ menu }: { menu: Menu }) {
           width={500}
           height={500}
           className="rounded-lg shadow-md"
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </div>
-
       {/* Deskripsi Menu */}
       <div>
         <Typography variant="subtitle1" className="text-sm text-gray-600 mt-1">
           {menu.description}
         </Typography>
       </div>
-
       <Divider className="my-4" />
-
       <div className="space-y-1">
         <Typography variant="body1" className="text-gray-800">
           <strong>Porsi:</strong> {menu.portion} orang
@@ -63,6 +63,6 @@ export default function MenuDialogContent({ menu }: { menu: Menu }) {
           </Typography>
         </div>
       </div>
-    </DialogContent>
+    </DialogContent>)
   );
 }

@@ -26,7 +26,7 @@ export default function Home() {
   const isRecommendationUpdated = useRecommendationUpdate(recommendation);
 
   return (
-    <LayoutWithBottomNav>
+    (<LayoutWithBottomNav>
       <div className="w-full h-auto">
         <div className="absolute top-0 left-0 w-full h-60 bg-primary shadow-md"></div>
         <div className="absolute top-4 right-4">
@@ -51,7 +51,6 @@ export default function Home() {
           <p className="text-white mt-2">Rekomendasi Menu untuk Anda!</p>
         </div>
       </div>
-
       {/* Carousel */}
       <div>
         <Carousel indicators={false} navButtonsAlwaysInvisible>
@@ -63,15 +62,16 @@ export default function Home() {
               <Image
                 src={img}
                 alt={`Foto ${index + 1}`}
-                layout="fill"
-                objectFit="cover"
                 className="rounded-l"
-              />
+                fill
+                sizes="100vw"
+                style={{
+                  objectFit: "cover"
+                }} />
             </div>
           ))}
         </Carousel>
       </div>
-
       {recommendation && (
         <div className="mb-6 text-center px-4">
           <Typography className="font-bold text-2xl text-gray-800">
@@ -82,7 +82,6 @@ export default function Home() {
           </Typography>
         </div>
       )}
-
       <div className="space-y-4 px-4">
         {recommendation?.status.generator_error && (
           <Alert severity="error">
@@ -116,12 +115,10 @@ export default function Home() {
 
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
       </div>
-
       <div className="my-6 space-y-4 text-center px-4">
         <GenerateRecommendationButton />
         <UpdateDataDialog />
       </div>
-
       <div>
         {/* Skeleton Placeholder Jika Sedang Generating */}
         {recommendation?.status.is_generating && (
@@ -139,6 +136,6 @@ export default function Home() {
             />
           )}
       </div>
-    </LayoutWithBottomNav>
+    </LayoutWithBottomNav>)
   );
 }

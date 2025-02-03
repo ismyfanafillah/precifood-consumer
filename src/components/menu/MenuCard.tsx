@@ -11,14 +11,17 @@ import { truncateText } from "@/utils/string";
 
 export default function MenuCard({ menu }: { menu: Menu }) {
   return (
-    <Card className="flex items-center p-4 rounded-3xl">
+    (<Card className="flex items-center p-4 rounded-3xl">
       <CardMedia className="w-24 h-24 rounded-3xl">
         <Image
           src={menu.image_url}
           alt={`Foto ${menu.name}`}
           width={200}
           height={200}
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </CardMedia>
       <div className="flex-1 flex flex-col justify-between">
         <CardContent className="flex-1 px-4">
@@ -30,6 +33,6 @@ export default function MenuCard({ menu }: { menu: Menu }) {
           <InfoMenuDialog id={menu.id} />
         </CardActions>
       </div>
-    </Card>
+    </Card>)
   );
 }

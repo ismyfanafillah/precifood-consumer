@@ -60,7 +60,7 @@ export default function Login() {
   });
 
   return (
-    <div className="w-full h-screen relative overflow-hidden">
+    (<div className="w-full h-screen relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full z-0">
         <Carousel indicators={false} navButtonsAlwaysInvisible>
           {image.map((img, index) => (
@@ -71,17 +71,17 @@ export default function Login() {
               <Image
                 src={img}
                 alt={`Foto ${index + 1}`}
-                layout="fill"
-                objectFit="cover"
                 className="rounded-lg"
-              />
+                fill
+                sizes="100vw"
+                style={{
+                  objectFit: "cover"
+                }} />
             </div>
           ))}
         </Carousel>
       </div>
-
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10"></div>
-
       <div className="relative z-20 items-center justify-center w-full h-full p-8">
         <div className="text-center mb-8">
           <div className="mb-4">
@@ -195,6 +195,6 @@ export default function Login() {
           </p>
         </div>
       </div>
-    </div>
+    </div>)
   );
 }

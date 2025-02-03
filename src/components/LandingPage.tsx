@@ -28,7 +28,7 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center bg-gray-100">
+    (<div className="flex flex-col items-center justify-center min-h-screen p-4 text-center bg-gray-100">
       <div className="max-w-md w-full">
         {/* Carousel / Slider */}
         <Carousel indicators={false} navButtonsAlwaysInvisible>
@@ -40,10 +40,13 @@ export default function LandingPage() {
               <Image
                 src={img.image}
                 alt={`Foto ${index + 1}`}
-                layout="fill"
-                objectFit="cover"
                 className="rounded-l"
-              />
+                fill
+                unoptimized
+                sizes="100vw"
+                style={{
+                  objectFit: "cover"
+                }} />
 
               <h2 className="text-2xl font-bold mt-4">{img.title}</h2>
               <p className="text-gray-700 text-sm mt-2">{img.description}</p>
@@ -90,7 +93,7 @@ export default function LandingPage() {
           </Link>
         </div>
       </div>
-    </div>
+    </div>)
   );
 }
 

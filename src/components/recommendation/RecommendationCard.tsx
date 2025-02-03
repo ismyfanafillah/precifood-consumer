@@ -14,7 +14,7 @@ export default function RecommendationCard({
   recommendation: SimpleRecommendation;
 }) {
   return (
-    <Card className="flex items-center p-4 rounded-3xl">
+    (<Card className="flex items-center p-4 rounded-3xl">
       <div className="w-24 h-24 relative rounded-3xl overflow-hidden">
         <Carousel indicators={false} navButtonsAlwaysInvisible>
           {recommendation.image_url.map((imageObj, index) => (
@@ -24,7 +24,10 @@ export default function RecommendationCard({
                 alt={`Foto ${recommendation.rank} ${index + 1}`}
                 width={100}
                 height={100}
-              />
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
             </div>
           ))}
         </Carousel>
@@ -48,6 +51,6 @@ export default function RecommendationCard({
           />
         </CardActions>
       </div>
-    </Card>
+    </Card>)
   );
 }
