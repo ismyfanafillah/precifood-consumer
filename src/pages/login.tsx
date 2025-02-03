@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Carousel from "react-material-ui-carousel";
 
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -8,31 +7,27 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {
   Alert,
+  Box,
   Button,
+  IconButton,
   Link,
   MenuItem,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
 
+import { useGetRestaurants } from "@/hooks/useGetData";
 import { setCookie } from "@/utils/cookie";
 import { postData } from "@/utils/http";
 import { LoginSchema } from "@/validations/auth";
-import { useGetRestaurants } from "@/hooks/useGetData";
-
-const image = [
-  "/images/image1.png",
-  "/images/image2.png",
-  "/images/image3.png",
-  "/images/image4.png",
-  "/images/image5.png",
-];
 
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { data: restaurants } = useGetRestaurants();
+  const { data: restaurants } = useGetRestaurants(); // Fetch restaurants
   const router = useRouter();
 
   const loginForm = useForm<z.infer<typeof LoginSchema>>({
@@ -60,103 +55,98 @@ export default function Login() {
   });
 
   return (
-    (<div className="w-full h-screen relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-full z-0">
-        <Carousel indicators={false} navButtonsAlwaysInvisible>
-          {image.map((img, index) => (
-            <div
-              key={index}
-              className="relative w-full h-screen overflow-hidden"
-            >
-              <Image
-                src={img}
-                alt={`Foto ${index + 1}`}
-                className="rounded-lg"
-                fill
-                sizes="100vw"
-                style={{
-                  objectFit: "cover"
-                }} />
-            </div>
-          ))}
-        </Carousel>
-      </div>
-      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10"></div>
-      <div className="relative z-20 items-center justify-center w-full h-full p-8">
-        <div className="text-center mb-8">
-          <div className="mb-4">
-            {/* Menampilkan logo */}
-            {/* <Image
-              src="/public/images/logo.png"
-              alt="Precifood Logo"
-              width={150} // Lebar gambar
-              height={50} // Tinggi gambar
-              className="mx-auto"
-            /> */}
-          </div>
-          <Typography
-            variant="h4"
-            component="h1"
-            color="white"
-            className="font-bold"
-          >
-            PreciFood
-          </Typography>
-          <Typography variant="body1" color="white" className="mt-2 italic">
-            For Specific Restaurant
-          </Typography>
-        </div>
+    <Box className="flex flex-col items-center justify-center min-h-screen bg-primary px-4">
+      {/* Logo */}
+      <Box className="relative z-10 flex justify-center">
+        <Image
+          src="/images/PreciFoodLogo.png"
+          alt="Logo"
+          width={200}
+          height={100}
+        />
+      </Box>
 
-        <div className="bg-white p-6 rounded-lg shadow-lg w-full">
-          <form onSubmit={login}>
-            <Typography
-              variant="h6"
-              color="primary"
-              className="mt-2 text-center font-bold"
-            >
-              Selamat datang kembali!
-            </Typography>
-            <Typography
-              variant="body1"
-              color="primary"
-              className="mb-2 text-center"
-            >
-              Silakan masuk untuk melanjutkan.
-            </Typography>
-            <div className="mb-4">
-              <TextField
-                {...register("email")}
-                required
-                id="email"
-                label="Email"
-                size="small"
-                type="email"
-                className="w-full"
-                placeholder="Masukkan Email"
-                error={!!errors.email}
-                helperText={errors.email?.message}
-              />
-            </div>
-            <div className="mb-4">
-              <TextField
-                {...register("password")}
-                required
-                id="password"
-                label="Kata Sandi"
-                size="small"
-                type="password"
-                className="w-full"
-                placeholder="Masukkan Kata Sandi"
-                error={!!errors.password}
-                helperText={errors.password?.message}
-              />
-            </div>
+      <Typography
+        variant="body1"
+        color="white"
+        className="mt-2 text-center italic"
+      >
+        Untuk Restoran Spesifik
+      </Typography>
+
+      {/* Card Login */}
+      <Paper
+        elevation={4}
+        className="relative z-10 w-full max-w-sm p-5 mt-6 bg-white rounded-lg shadow-lg"
+      >
+        {/* Back Button */}
+        <Box className="flex items-center mt-2">
+          <IconButton onClick={() => router.push("/")}>
+            <ArrowBackIcon />
+          </IconButton>
+          <Typography variant="body1" className="font-medium ml-2">
+            Masuk Akun
+          </Typography>
+        </Box>
+
+        <Box className="flex justify-center">
+          <Image
+            src="/images/masuk.svg"
+            alt="Join Illustration"
+            width={250}
+            height={120}
+          />
+        </Box>
+
+        {/* Page Title */}
+        <Typography variant="h5" className="text-center font-bold mt-2">
+          Masuk Akun
+        </Typography>
+        <Typography variant="body2" className="text-center text-gray-600">
+          Pilihan kecil, dampak besar! Masuk ke akunmu dan terus jaga pilihan
+          makananmu yang lebih baik!
+        </Typography>
+
+        {/* Login Form */}
+        <form onSubmit={login} className="mt-4">
+          <Box className="mb-3">
+            <TextField
+              {...register("email")}
+              required
+              label="Email"
+              fullWidth
+              variant="outlined"
+              size="small"
+              placeholder="Masukkan Email"
+              error={!!errors.email}
+              helperText={errors.email?.message}
+            />
+          </Box>
+
+          <Box className="mb-3">
+            <TextField
+              {...register("password")}
+              required
+              label="Password"
+              type="password"
+              fullWidth
+              variant="outlined"
+              size="small"
+              placeholder="Masukkan Password"
+              error={!!errors.password}
+              helperText={errors.password?.message}
+            />
+          </Box>
+
+          {/* Pilihan Restoran */}
+          <Box className="mb-3">
             <TextField
               select
               {...register("restaurant_id")}
               required
-              label="Restaurants"
-              className="w-full"
+              label="Pilih Restoran"
+              fullWidth
+              variant="outlined"
               size="small"
               error={!!errors.restaurant_id}
               helperText={errors.restaurant_id?.message}
@@ -170,31 +160,33 @@ export default function Login() {
                   {restaurant.name}
                 </MenuItem>
               ))}
-              {/* <MenuItem value="R-0192c857-35e6-7cc2-98da-46f0faf6f651">Restoran Karimata</MenuItem> */}
             </TextField>
-            <Button
-              variant="contained"
-              type="submit"
-              className="w-full py-2 mt-4"
-              size="large"
-            >
-              Masuk
-            </Button>
-          </form>
+          </Box>
 
-          {errorMessage && (
-            <Alert severity="error" className="mt-4">
-              {errorMessage}
-            </Alert>
-          )}
-          <p className="mt-4 text-center">
-            Belum memiliki akun?{" "}
-            <Link href="/register" className="text-primary font-semibold">
-              Daftar
-            </Link>
-          </p>
-        </div>
-      </div>
-    </div>)
+          <Button
+            variant="contained"
+            fullWidth
+            type="submit"
+            className="bg-primary text-white py-2 mt-3"
+          >
+            Masuk
+          </Button>
+        </form>
+
+        {errorMessage && (
+          <Alert severity="error" className="mt-3">
+            {errorMessage}
+          </Alert>
+        )}
+
+        {/* Register Link */}
+        <Typography variant="body2" className="text-center mt-3">
+          Tidak Punya Akun?{" "}
+          <Link href="/register" className="font-semibold">
+            Daftar
+          </Link>
+        </Typography>
+      </Paper>
+    </Box>
   );
 }

@@ -27,7 +27,7 @@ export default function Menus() {
     <LayoutWithBottomNav>
       <div className="mb-4 text-center">
         <h1 className="text-2xl font-bold">Menu</h1>
-        <hr className="border-t-2 border-primary mt-2" />
+        <hr className="border-t-2 border-primary mt-2 w-24 mx-auto"  />
       </div>
       <Search
         onSearch={handleSearch}

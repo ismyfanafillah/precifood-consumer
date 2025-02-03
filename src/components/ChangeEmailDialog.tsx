@@ -80,9 +80,9 @@ export default function ChangeEmailDialog({
         <Button
           size="small"
           onClick={handleDialogOpen}
-          variant="contained"
-          color="secondary"
-          className="h-10 px-6 whitespace-nowrap text-xs text-white"
+          variant="outlined"
+          // color="secondary"
+          className="h-10 px-6 whitespace-nowrap text-xs text-primary border-2 border-primary"
         >
           Ganti Email
         </Button>

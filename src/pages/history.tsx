@@ -12,7 +12,7 @@ export default function History() {
     <LayoutWithBottomNav>
       <div className="mb-4 text-center">
         <h1 className="text-2xl font-bold">Riwayat Pesanan</h1>
-        <hr className="border-t-2 border-primary mt-2" />
+        <hr className="border-t-2 border-primary mt-2 w-24 mx-auto" />
       </div>
       {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
       {isLoading ? (

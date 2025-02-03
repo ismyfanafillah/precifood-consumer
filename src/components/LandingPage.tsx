@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Carousel from "react-material-ui-carousel";
 
 import Image from "next/image";
@@ -6,202 +7,154 @@ import Link from "next/link";
 import { Button } from "@mui/material";
 
 export default function LandingPage() {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
   const slides = [
     {
-      image: "/images/image1.png",
-      title: "Selamat Datang di PreciFood",
+      image: "/images/mobile.png",
+      title: "PreciFood: Kenali Makananmu, Jaga Kesehatanmu!",
       description:
-        "Temukan rekomendasi menu terbaik untuk restoran favorit Anda!",
-    },
-    {
-      image: "/images/opt-makan.png",
-      title: "Manfaat PreciFood",
-      description:
-        "Dapatkan rekomendasi menu yang sesuai dengan selera Anda berdasarkan preferensi dan ulasan pengguna lain.",
+        "Mulai langkah kecil untuk hidup lebih sehat dengan mengenali kandungan makanan yang kamu konsumsi bersama PreciFood.",
+      buttonText: "Ayo Mulai",
     },
     {
       image: "/images/mobile2.png",
-      title: "Cara Menggunakan",
+      title: "Kenali PreciFood",
       description:
-        "Cukup daftar atau login, pilih restoran, dan dapatkan rekomendasi terbaik!",
+        "PreciFood adalah aplikasi berbasis web yang memberikan rekomendasi menu dengan kalori dan gizi seimbang, dipersonalisasi sesuai kebutuhanmu.",
+      buttonText: "Lanjut",
+    },
+    {
+      image: "/images/pilihan.png",
+      title: "Jelajahi PreciFood",
+      description:
+        "Mulai perjalanan makan sehatmu dengan fitur rekomendasi makanan restoran spesifik. PreciFood memberikan pilihan makanan dan minuman yang dipersonalisasi, baik untuk individu sehat maupun yang memiliki riwayat Penyakit Tidak Menular (PTM).",
+      buttonText: "Lanjut",
+    },
+    {
+      image: "/images/makan.png",
+      title: "Untukmu, Kondisimu. Untukmu, Makananmu.",
+      description:
+        "Setiap tubuh memiliki kebutuhan unik. PreciFood hadir untuk membantumu menemukan makanan terbaik yang sesuai dengan kondisimu.",
+      buttonText: "Lanjut",
+    },
+    {
+      image: "/images/join.png",
+      title: "Selamat Datang!",
+      description:
+        "Sebelum memulai perjalanan sebagai 'Petarung Makan Sehat', yuk masuk atau daftarkan akunmu terlebih dahulu dan temukan makanan terbaik untukmu!",
+      buttons: [
+        {
+          text: "Masuk",
+          link: "/login",
+          variant: "contained" as const,
+        },
+        {
+          text: "Daftar",
+          link: "/register",
+          variant: "outlined" as const,
+        },
+      ],
     },
   ];
 
   return (
-    (<div className="flex flex-col items-center justify-center min-h-screen p-4 text-center bg-gray-100">
-      <div className="max-w-md w-full">
-        {/* Carousel / Slider */}
-        <Carousel indicators={false} navButtonsAlwaysInvisible>
-          {slides.map((img, index) => (
-            <div
-              key={index}
-              className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden rounded-lg shadow-lg"
-            >
-              <Image
-                src={img.image}
-                alt={`Foto ${index + 1}`}
-                className="rounded-l"
-                fill
-                unoptimized
-                sizes="100vw"
-                style={{
-                  objectFit: "cover"
-                }} />
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center bg-gradient-to-br from-primary to-primary/80 relative">
+      {/* LOGO di LUAR CARD */}
+      <div className="absolute top-10 flex flex-col items-center">
+        <Image
+          src="/images/PreciFoodLogo.png"
+          alt="PreciFood Logo"
+          width={150} // Sesuaikan ukuran logo
+          height={200}
+          className="rounded-full shadow-lg"
+        />
+        {/* 
+        TAGLINE DI ANTARA LOGO DAN CARD
+        <p className="mt-4 text-white text-lg font-semibold animate-fade-in">
+          Untuk Pilihan Makanan Spesifik Restoran yang Lebih!
+        </p> */}
+      </div>
 
-              <h2 className="text-2xl font-bold mt-4">{img.title}</h2>
-              <p className="text-gray-700 text-sm mt-2">{img.description}</p>
-            </div>
-          ))}
-        </Carousel>
-        {/* <Carousel indicators={false} navButtonsAlwaysVisible>
+      {/* Card utama */}
+      <div className="max-w-lg w-full bg-white rounded-3xl shadow-xl p-8 transition-transform transform hover:scale-105">
+        {/* Carousel */}
+        <Carousel
+          index={activeIndex}
+          onChange={(index) => setActiveIndex(index ?? 0)}
+          indicators={true}
+          navButtonsAlwaysInvisible
+          animation="slide"
+        >
           {slides.map((slide, index) => (
             <div key={index} className="flex flex-col items-center p-6">
-              <div className="relative w-64 h-64">
+              <div className="relative w-64 h-64 bg-gray-200 rounded-2xl shadow-lg overflow-hidden">
                 <Image
                   src={slide.image}
-                  alt={`Onboarding ${index + 1}`}
-                  layout="fill"
-                  objectFit="cover"
-                  // unoptimized
+                  alt={`Slide ${index + 1}`}
                   className="rounded-lg"
+                  fill
+                  sizes="100vw"
+                  style={{ objectFit: "cover" }}
                 />
               </div>
 
-              <h2 className="text-2xl font-bold mt-4">{slide.title}</h2>
-              <p className="text-gray-700 text-sm mt-2">{slide.description}</p>
+              <h2 className="text-2xl font-extrabold mt-6 text-gray-900">
+                {slide.title}
+              </h2>
+              <p className="text-gray-600 text-base mt-3">
+                {slide.description}
+              </p>
+
+              {/* Tombol "Get Started" hanya untuk Slide 1 */}
+              {index === 0 && (
+                <Button
+                  variant="contained"
+                  className="mt-6 w-full rounded-full"
+                  color="primary"
+                  onClick={() => setActiveIndex(1)}
+                >
+                  {slide.buttonText}
+                </Button>
+              )}
+
+              {/* Tombol "Next" untuk Slide 2, 3 & 4 */}
+              {(index === 1 || index === 2 || index === 3) && (
+                <Button
+                  variant="contained"
+                  className="mt-6 w-full rounded-full"
+                  color="primary"
+                  onClick={() => setActiveIndex(index + 1)}
+                >
+                  {slide.buttonText}
+                </Button>
+              )}
+
+              {/* Tombol Login & Register hanya pada slide terakhir */}
+              {slide.buttons && (
+                <div className="mt-6 flex flex-col space-y-4 w-full">
+                  {slide.buttons.map((button, btnIndex) => (
+                    <Link key={btnIndex} href={button.link} passHref>
+                      <Button
+                        variant={button.variant}
+                        fullWidth
+                        className="rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition-all"
+                        style={
+                          button.variant === "contained"
+                            ? { backgroundColor: "primary", color: "white" }
+                            : {}
+                        }
+                      >
+                        {button.text}
+                      </Button>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
-        </Carousel> */}
-
-        {/* Tombol Register & Login */}
-        <div className="mt-6 flex justify-center space-x-4">
-          <Link href="/register">
-            <Button
-              variant="contained"
-              style={{ backgroundColor: "#4F6F52", color: "white" }}
-            >
-              Register
-            </Button>
-          </Link>
-          <Link href="/login">
-            <Button
-              variant="outlined"
-              style={{ borderColor: "#4F6F52", color: "#4F6F52" }}
-            >
-              Login
-            </Button>
-          </Link>
-        </div>
+        </Carousel>
       </div>
-    </div>)
+    </div>
   );
 }
-
-// "use client";
-
-// import { useState } from "react";
-// import Carousel from "react-material-ui-carousel";
-// import Image from "next/image";
-// import Link from "next/link";
-// import { Button } from "@mui/material";
-
-// export default function LandingPage() {
-//   const slides = [
-//     {
-//       image: "/images/image1.png",
-//       title: "Selamat Datang di PreciFood",
-//       description: "Temukan rekomendasi menu terbaik untuk restoran favorit Anda!",
-//     },
-//     {
-//       image: "/images/makan.svg",
-//       title: "Manfaat PreciFood",
-//       description: "Dapatkan rekomendasi menu yang sesuai dengan selera Anda berdasarkan preferensi dan ulasan pengguna lain.",
-//     },
-//     {
-//       image: "/images/mobile2.svg",
-//       title: "Cara Menggunakan",
-//       description: "Cukup daftar atau login, pilih restoran, dan dapatkan rekomendasi terbaik!",
-//     },
-//   ];
-
-//   const [activeStep, setActiveStep] = useState(0);
-//   const maxSteps = slides.length;
-
-//   const handleNext = () => {
-//     if (activeStep < maxSteps - 1) {
-//       setActiveStep(activeStep + 1);
-//     }
-//   };
-
-//   const handleBack = () => {
-//     if (activeStep > 0) {
-//       setActiveStep(activeStep - 1);
-//     }
-//   };
-
-//   return (
-//     <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center bg-gray-100">
-//       <div className="max-w-md w-full relative">
-//         {/* Carousel / Slider */}
-//         <Carousel
-//           indicators={false}
-//           navButtonsAlwaysInvisible
-//           autoPlay={false} // Tidak berpindah otomatis
-//           index={activeStep}
-//           animation="slide"
-//         >
-//           {slides.map((slide, index) => (
-//             <div key={index} className="flex flex-col items-center p-6">
-//               <div className="relative w-64 h-64 flex justify-center items-center">
-//                 <Image
-//                   src={slide.image}
-//                   alt={`Onboarding ${index + 1}`}
-//                   layout="intrinsic"
-//                   width={250}
-//                   height={250}
-//                   unoptimized
-//                   className="rounded-lg"
-//                 />
-//               </div>
-//               <h2 className="text-2xl font-bold mt-4">{slide.title}</h2>
-//               <p className="text-gray-700 text-sm mt-2">{slide.description}</p>
-//             </div>
-//           ))}
-//         </Carousel>
-
-//         {/* Tombol Navigasi Kiri & Kanan */}
-//         <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
-//           {activeStep > 0 && (
-//             <button onClick={handleBack}>
-//               <Image src="/images/arrow-left.svg" alt="Previous" width={40} height={40} />
-//             </button>
-//           )}
-//         </div>
-
-//         <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
-//           {activeStep < maxSteps - 1 && (
-//             <button onClick={handleNext}>
-//               <Image src="/images/arrow-right.svg" alt="Next" width={40} height={40} />
-//             </button>
-//           )}
-//         </div>
-
-//         {/* Tombol Register & Login Muncul di Slide Terakhir */}
-//         {activeStep === maxSteps - 1 && (
-//           <div className="mt-6 flex justify-center space-x-4">
-//             <Link href="/register">
-//               <Button variant="contained" className="bg-green-600 text-white p-3 rounded-lg">
-//                 Register
-//               </Button>
-//             </Link>
-//             <Link href="/login">
-//               <Button variant="outlined" className="border-green-600 text-green-600 p-3 rounded-lg">
-//                 Login
-//               </Button>
-//             </Link>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }

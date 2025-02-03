@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 function isTokenExpired(token: string): boolean {
   try {
-    const payload = token.split('.')[1];
+    const payload = token.split(".")[1];
     const decodedPayload = atob(payload);
     const parsedPayload = JSON.parse(decodedPayload);
 
@@ -14,7 +14,7 @@ function isTokenExpired(token: string): boolean {
   }
 }
 
-export function middleware(request: NextRequest) {  
+export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === "/") {
     return NextResponse.next();
   }
@@ -31,5 +31,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: "/((?!login|register|_next).*)",
+  matcher: "/((?!login|register|_next|images).*)",
 };

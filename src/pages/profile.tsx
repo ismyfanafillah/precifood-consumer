@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
+import Image from "next/image";
+
+import dayjs from "dayjs";
 import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@mui/material";
+import { Box, Button, Divider, Paper, Typography } from "@mui/material";
 
 import ChangeEmailDialog from "@/components/ChangeEmailDialog";
 import ChangePasswordDialog from "@/components/ChangePasswordDialog";
@@ -27,8 +30,8 @@ export default function Profile() {
 
   const handleUpdate = handleSubmit(async (data) => {
     const confirmation = await openConfirmationDialog({
-      title: "Konfirmasi Edit Profile",
-      description: "Apakah Anda yakin ingin mengedit profile anda?",
+      title: "Konfirmasi Edit Profil",
+      description: "Apakah Anda yakin ingin mengedit profil Anda?",
     });
     if (!confirmation) return;
     try {
@@ -52,22 +55,53 @@ export default function Profile() {
 
   return (
     <LayoutWithBottomNav>
-      <div className="mb-4 text-center">
-        <h1 className="text-2xl font-bold">Profil</h1>
-        <hr className="border-t-2 border-primary mt-2" />
-      </div>
+      <Box className="flex flex-col items-center text-center">
+        <Typography variant="h5" className="font-semibold">
+          {profile?.personal_information?.name || "Pengguna"}
+        </Typography>
+        <Typography variant="body2" className="text-gray-500 italic">
+          Terdaftar:{" "}
+          {profile?.user?.registered_at
+            ? dayjs(profile.user.registered_at).format("DD/MM/YYYY")
+            : "-"}
+        </Typography>
+      </Box>
 
-      <ProfileDataForm form={profileForm} profile={profile} />
-      <ChangeEmailDialog profile={profile} />
-      <ChangePasswordDialog />
-      <div className="flex justify-between items-center min-h-[40vh]">
+      {/* Divider */}
+      <Divider className="my-4" />
+
+      {/* Card untuk Form Profil */}
+      <Paper className="w-full max-w-md p-5 mx-auto bg-white rounded-lg shadow-lg">
+        <Box className="flex justify-center">
+          <Image
+            src="/images/edit.png"
+            alt="Edit Profil"
+            width={200}
+            height={100}
+          />
+        </Box>
+
+        <Box className="mb-6">
+          <ProfileDataForm form={profileForm} profile={profile} />
+        </Box>
+
+        {/* Change Email & Password dengan Spacing yang Lebih Baik */}
+        <Box className="space-y-4">
+          <ChangeEmailDialog profile={profile} />
+          <ChangePasswordDialog />
+        </Box>
+      </Paper>
+
+      <Box className="flex flex-col items-center w-full max-w-sm space-y-4 justify-end">
+        <Button
+          variant="contained"
+          onClick={handleUpdate}
+          className="w-full border-2 border-primary bg-primary text-white rounded-full py-3 font-semibold hover:bg-gray-300 hover:text-primary"
+        >
+          Simpan
+        </Button>
         <LogoutButton />
-        <div className="text-right xrounded-full">
-          <Button variant="contained" onClick={handleUpdate} className="rounded-full">
-            Simpan
-          </Button>
-        </div>
-      </div>
+      </Box>
     </LayoutWithBottomNav>
   );
 }

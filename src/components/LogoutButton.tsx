@@ -19,12 +19,12 @@ export function LogoutButton() {
     router.push("/login");
   };
   return (
-    <div className="text-left">
+    <div className="flex flex-col items-center w-full max-w-sm">
       <Button
-        variant="contained"
+        variant="outlined"
         onClick={logout}
-        color="error"
-        className="rounded-full"
+        // color="error"
+        className="w-full border-2 border-error text-error rounded-full py-3 font-semibold hover:bg-error  hover:text-white"
       >
         Keluar
       </Button>

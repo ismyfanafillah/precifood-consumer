@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
+import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { Dayjs } from "dayjs";
 import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Alert, Button, Link, MenuItem, TextField } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {
+  Alert,
+  Box,
+  Button,
+  IconButton,
+  Link,
+  MenuItem,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -47,162 +59,223 @@ export default function Register() {
   });
 
   return (
-    <div className="p-8 pb-24 space-y-5">
-      <div className="mb-4 text-center">
-        <h1 className="text-2xl font-bold">Daftar Akun</h1>
-        <hr className="border-t-2 border-primary mt-2" />
-      </div>
-      <div className="flex flex-wrap gap-4">
-        <TextField
-          {...register("name")}
-          required
-          id="name"
-          label="Nama"
-          className="w-full"
-          size="small"
-          placeholder="Masukkan Nama"
-          error={!!errors.name}
-          helperText={errors.name?.message}
+    <Box className="flex flex-col items-center justify-center min-h-screen bg-primary px-4">
+      {/* Logo */}
+      <Box className="relative z-10 flex justify-center mt-6">
+        <Image
+          src="/images/PreciFoodLogo.png"
+          alt="Logo"
+          width={100}
+          height={40}
         />
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            label="Tanggal Lahir"
-            onChange={handleDateChange}
-            slotProps={{
-              textField: {
-                error: !!errors.birth,
-                size: "small",
-                helperText: errors.birth?.message,
-                placeholder: "Masukkan Tanggal Lahir",
-                required: true,
-              },
-            }}
-            className="w-full"
+      </Box>
+
+      <Typography
+        variant="body1"
+        color="white"
+        className="mt-1 text-center italic"
+      >
+        Untuk Restoran Spesifik
+      </Typography>
+
+      {/* Card Register */}
+      <Paper
+        elevation={4}
+        className="relative z-10 w-full max-w-sm p-4 mt-3 bg-white rounded-lg shadow-lg"
+      >
+        {/* Back Button */}
+        <Box className="flex items-center mb-3">
+          <IconButton onClick={() => router.push("/")}>
+            <ArrowBackIcon />
+          </IconButton>
+          <Typography variant="body1" className="font-medium ml-2">
+            Daftar Akun
+          </Typography>
+        </Box>
+
+        <Box className="flex justify-center">
+          <Image
+            src="/images/daftar.png"
+            alt="Join Illustration"
+            width={150}
+            height={100}
           />
-        </LocalizationProvider>
-        <TextField
-          select
-          {...register("sex")}
-          required
-          label="Jenis Kelamin"
-          className="w-full"
-          size="small"
-          error={!!errors.sex}
-          helperText={errors.sex?.message}
-          value={watch("sex") || ""}
-        >
-          <MenuItem value="">
-            <em>Pilih Jenis Kelamin</em>
-          </MenuItem>
-          <MenuItem value="Laki-laki">Laki-laki</MenuItem>
-          <MenuItem value="Perempuan">Perempuan</MenuItem>
-        </TextField>
-        <TextField
-          {...register("weight", {
-            setValueAs: (value) => +value,
-          })}
-          required
-          id="weight"
-          label="Berat Badan (kg)"
-          type="number"
-          className="w-full"
-          size="small"
-          placeholder="Masukkan Berat Badan"
-          error={!!errors.weight}
-          helperText={errors.weight?.message}
-        />
-        <TextField
-          {...register("height", {
-            setValueAs: (value) => +value,
-          })}
-          required
-          id="height"
-          label="Tinggi Badan (cm)"
-          type="number"
-          className="w-full"
-          size="small"
-          placeholder="Mausukkan Tinggi Badan"
-          error={!!errors.height}
-          helperText={errors.height?.message}
-        />
-        <TextField
-          {...register("email")}
-          required
-          id="email"
-          label="Email"
-          type="email"
-          className="w-full"
-          size="small"
-          placeholder="Masukkan Email"
-          error={!!errors.email}
-          helperText={errors.email?.message}
-        />
-        <TextField
-          {...register("phone")}
-          required
-          id="phone-number"
-          label="Nomor Telepon"
-          type="tel"
-          className="w-full"
-          size="small"
-          placeholder="Masukkan Nomor Telepon"
-          error={!!errors.phone}
-          helperText={errors.phone?.message}
-        />
-        <TextField
-          {...register("password")}
-          required
-          id="password"
-          label="Kata Sandi"
-          type="password"
-          className="w-full"
-          size="small"
-          placeholder="Masukkan Kata Sandi"
-          error={!!errors.password}
-          helperText={errors.password?.message}
-        />
-        <TextField
-          {...register("password_confirmation")}
-          required
-          id="confirm-password"
-          label="Konfirmasi Kata Sandi"
-          type="password"
-          className="w-full"
-          size="small"
-          placeholder="Masukkan Konfirmasi Kata Sandi"
-          error={!!errors.password_confirmation}
-          helperText={errors.password_confirmation?.message}
-        />
-        <TextField
-          select
-          {...register("medical_history")}
-          required
-          label="Riwayat Penyakit"
-          className="w-full"
-          size="small"
-          error={!!errors.medical_history}
-          helperText={errors.medical_history?.message}
-          value={watch("medical_history") || ""}
-        >
-          <MenuItem value="">
-            <em>Pilih Riwayat Penyakit</em>
-          </MenuItem>
-          <MenuItem value="no_history">Tidak Ada</MenuItem>
-          <MenuItem value="cardiovascular">Jantung Koroner/Kolesterol</MenuItem>
-          <MenuItem value="diabetes">Diabetes</MenuItem>
-          <MenuItem value="hypertension">Hipertensi</MenuItem>
-        </TextField>
-      </div>
-      <Button size="small" variant="contained" onClick={signup}>
-          Daftar
-      </Button>
-      {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
-      <p>
-        Sudah memiliki akun?{" "}
-        <Link href="/login" className="text-primary font-semibold">
-          Masuk
-        </Link>
-      </p>
-    </div>
+        </Box>
+
+        {/* Page Title */}
+        <Typography variant="h6" className="text-center font-bold mt-2">
+          Daftar Akun
+        </Typography>
+        <Typography variant="body2" className="text-center text-gray-600">
+          Peduli dengan apa yang kamu konsumsi?
+          <br />
+          Daftar Sekarang!
+        </Typography>
+
+        {/* Register Form */}
+        <form onSubmit={signup} className="mt-3">
+          <Box className="mb-3">
+            <TextField
+              {...register("name")}
+              required
+              label="Nama"
+              fullWidth
+              variant="outlined"
+              size="small"
+              placeholder="Masukkan Nama"
+              error={!!errors.name}
+              helperText={errors.name?.message}
+            />
+          </Box>
+
+          <Box className="mb-3">
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Tanggal Lahir"
+                onChange={handleDateChange}
+                slotProps={{
+                  textField: {
+                    error: !!errors.birth,
+                    helperText: errors.birth?.message,
+                    required: true,
+                    size: "small",
+                  },
+                }}
+                className="w-full"
+              />
+            </LocalizationProvider>
+          </Box>
+
+          <Box className="mb-3">
+            <TextField
+              select
+              {...register("sex")}
+              required
+              label="Jenis Kelamin"
+              fullWidth
+              variant="outlined"
+              size="small"
+              error={!!errors.sex}
+              helperText={errors.sex?.message}
+              value={watch("sex") || ""}
+            >
+              <MenuItem value="">
+                <em>Pilih Jenis Kelamin</em>
+              </MenuItem>
+              <MenuItem value="Laki-laki">Laki-laki</MenuItem>
+              <MenuItem value="Perempuan">Perempuan</MenuItem>
+            </TextField>
+          </Box>
+
+          <Box className="mb-3">
+            <TextField
+              {...register("email")}
+              required
+              label="Email"
+              type="email"
+              fullWidth
+              variant="outlined"
+              size="small"
+              placeholder="Masukkan Email"
+              error={!!errors.email}
+              helperText={errors.email?.message}
+            />
+          </Box>
+
+          <Box className="mb-3">
+            <TextField
+              {...register("phone")}
+              required
+              label="Nomor Telepon"
+              type="tel"
+              fullWidth
+              variant="outlined"
+              size="small"
+              placeholder="Masukkan Nomor Telepon"
+              error={!!errors.phone}
+              helperText={errors.phone?.message}
+            />
+          </Box>
+
+          <Box className="mb-3">
+            <TextField
+              {...register("password")}
+              required
+              label="Password"
+              type="password"
+              fullWidth
+              variant="outlined"
+              size="small"
+              placeholder="Masukkan Password"
+              error={!!errors.password}
+              helperText={errors.password?.message}
+            />
+          </Box>
+
+          <Box className="mb-3">
+            <TextField
+              {...register("password_confirmation")}
+              required
+              label="Konfirmasi Password"
+              type="password"
+              fullWidth
+              variant="outlined"
+              size="small"
+              placeholder="Masukkan Konfirmasi Password"
+              error={!!errors.password_confirmation}
+              helperText={errors.password_confirmation?.message}
+            />
+          </Box>
+
+          <Box className="mb-3">
+            <TextField
+              select
+              {...register("medical_history")}
+              required
+              label="Riwayat Penyakit"
+              fullWidth
+              variant="outlined"
+              size="small"
+              error={!!errors.medical_history}
+              helperText={errors.medical_history?.message}
+              value={watch("medical_history") || ""}
+            >
+              <MenuItem value="">
+                <em>Pilih Riwayat Penyakit</em>
+              </MenuItem>
+              <MenuItem value="no_history">Tidak Ada</MenuItem>
+              <MenuItem value="cardiovascular">
+                Jantung Koroner/Kolesterol
+              </MenuItem>
+              <MenuItem value="diabetes">Diabetes</MenuItem>
+              <MenuItem value="hypertension">Hipertensi</MenuItem>
+            </TextField>
+          </Box>
+
+          <Button
+            variant="contained"
+            fullWidth
+            type="submit"
+            className="bg-primary text-white py-2 mt-3"
+          >
+            Daftar
+          </Button>
+        </form>
+
+        {errorMessage && (
+          <Alert severity="error" className="mt-3">
+            {errorMessage}
+          </Alert>
+        )}
+
+        {/* Login Link */}
+        <Typography variant="body2" className="text-center mt-3">
+          Sudah Punya Akun?{" "}
+          <Link href="/login" className="font-semibold">
+            Masuk
+          </Link>
+        </Typography>
+      </Paper>
+    </Box>
   );
 }

@@ -64,11 +64,11 @@ export default function ChangePasswordDialog() {
         <Button
           size="small"
           onClick={() => setOpen(true)}
-          variant="contained"
-          color="secondary"
-          className="h-10 px-3 text-xs text-white"
+          variant="outlined"
+          // color="secondary"
+          className="h-10 px-3 text-xs text-primary border-2 border-primary"
         >
-          Ganti Kata Sandi
+          Ganti Password
         </Button>
       </div>
 
@@ -83,7 +83,7 @@ export default function ChangePasswordDialog() {
           <TextField
             {...register("old_password")}
             required
-            label="Kata sandi saat ini"
+            label="Password saat ini"
             type="password"
             size="small"
             name="old_password"
@@ -96,7 +96,7 @@ export default function ChangePasswordDialog() {
           <TextField
             {...register("new_password")}
             required
-            label="Kata sandi baru"
+            label="Password baru"
             type="password"
             size="small"
             name="new_password"
@@ -109,7 +109,7 @@ export default function ChangePasswordDialog() {
           <TextField
             {...register("password_confirmation")}
             required
-            label="Konfirmasi kata sandi"
+            label="Konfirmasi password"
             type="password"
             size="small"
             name="password_confirmation"

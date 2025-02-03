@@ -2,8 +2,9 @@ import Carousel from "react-material-ui-carousel";
 
 import Image from "next/image";
 
-import InfoIcon from "@mui/icons-material/Info";
-import { Alert, AlertTitle, IconButton, Link, Typography } from "@mui/material";
+// import InfoIcon from "@mui/icons-material/Info";
+import { Alert, AlertTitle, Box, Typography } from "@mui/material";
+// import { IconButton, Link } from "@mui/material";
 
 import LayoutWithBottomNav from "@/components/LayoutWithBottomNav";
 import UpdateDataDialog from "@/components/UpdateDataDialog";
@@ -26,10 +27,10 @@ export default function Home() {
   const isRecommendationUpdated = useRecommendationUpdate(recommendation);
 
   return (
-    (<LayoutWithBottomNav>
+    <LayoutWithBottomNav>
       <div className="w-full h-auto">
         <div className="absolute top-0 left-0 w-full h-60 bg-primary shadow-md"></div>
-        <div className="absolute top-4 right-4">
+        {/* <div className="absolute top-4 right-4">
           <Link href="/information">
             <IconButton
               aria-label="Information"
@@ -41,14 +42,29 @@ export default function Home() {
               />
             </IconButton>
           </Link>
-        </div>
+        </div> */}
 
         <div className="relative text-center">
-          <h1 className="text-3xl font-bold text-white">PreciFood</h1>
+          {/* <h1 className="text-3xl font-bold text-white">PreciFood</h1>
           <p className="text-secondary text-xs italic">
             For Specific Restaurant
-          </p>
-          <p className="text-white mt-2">Rekomendasi Menu untuk Anda!</p>
+          </p> */}
+          <Box className="relative z-10 flex justify-center">
+            <Image
+              src="/images/PreciFoodLogo.png"
+              alt="Logo"
+              width={200}
+              height={100}
+            />
+          </Box>
+
+          <Typography
+            variant="body1"
+            color="white"
+            className="mt-2 text-center italic text-xs" 
+          >
+            Rekomendasi pilihan menu yang lebih baik untuk Anda!
+          </Typography>
         </div>
       </div>
       {/* Carousel */}
@@ -66,8 +82,9 @@ export default function Home() {
                 fill
                 sizes="100vw"
                 style={{
-                  objectFit: "cover"
-                }} />
+                  objectFit: "cover",
+                }}
+              />
             </div>
           ))}
         </Carousel>
@@ -136,6 +153,6 @@ export default function Home() {
             />
           )}
       </div>
-    </LayoutWithBottomNav>)
+    </LayoutWithBottomNav>
   );
 }
