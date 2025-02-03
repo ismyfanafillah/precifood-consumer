@@ -36,7 +36,8 @@ export default function OrderDialogContent({
 
   const deleteOrder = async () => {
     try {
-      await deleteDataAuthenticated("/consumers/orders/${order.id}");
+      console.log("Deleting order with ID:", order.id);
+      await deleteDataAuthenticated(`/consumers/orders/${order.id}`);
       openToast({
         type: "success",
         message: "Pesanan berhasil dibatalkan!",
