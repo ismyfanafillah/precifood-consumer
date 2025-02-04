@@ -91,7 +91,7 @@ export default function Login() {
 
         <Box className="flex justify-center">
           <Image
-            src="/images/masuk.svg"
+            src="/images/masuk.png"
             alt="Join Illustration"
             width={250}
             height={120}

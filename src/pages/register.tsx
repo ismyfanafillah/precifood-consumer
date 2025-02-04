@@ -95,7 +95,7 @@ export default function Register() {
 
         <Box className="flex justify-center">
           <Image
-            src="/images/daftar.png"
+            src="/images/daftar.svg"
             alt="Join Illustration"
             width={150}
             height={100}
