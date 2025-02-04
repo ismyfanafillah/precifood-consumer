@@ -174,7 +174,7 @@ export default function Login() {
         </form>
 
         {errorMessage && (
-          <Alert severity="error" className="mt-3">
+          <Alert severity="error" className="mt-3 mb-2">
             {errorMessage}
           </Alert>
         )}
@@ -182,7 +182,7 @@ export default function Login() {
         {/* Register Link */}
         <Typography variant="body2" className="text-center mt-3">
           Tidak Punya Akun?{" "}
-          <Link href="/register" className="font-semibold">
+          <Link href="/register" className="font-bold">
             Daftar
           </Link>
         </Typography>
