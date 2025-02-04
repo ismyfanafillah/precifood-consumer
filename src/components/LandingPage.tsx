@@ -82,7 +82,7 @@ export default function LandingPage() {
           onChange={(index) => setActiveIndex(index ?? 0)}
           indicators={true}
           navButtonsAlwaysInvisible
-          animation="slide"
+          // animation="slide"
         >
           {slides.map((slide, index) => (
             <div key={index} className="flex flex-col items-center p-6">
