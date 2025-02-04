@@ -55,7 +55,7 @@ export default function Login() {
   });
 
   return (
-    <Box className="flex flex-col items-center justify-center min-h-screen bg-primary px-4">
+    <Box className="flex flex-col items-center justify-center min-h-screen bg-primary p-6">
       {/* Logo */}
       <Box className="relative z-10 flex justify-center">
         <Image

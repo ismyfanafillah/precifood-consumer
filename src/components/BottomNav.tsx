@@ -55,31 +55,31 @@ export default function BottomNav() {
             icon={<RestaurantMenuIcon />}
             component={Link}
             href="/restaurant"
-            className="text-secondary"
+            className="text-secondary hover:text-gray"
           />
           <BottomNavigationAction
             icon={<MenuBookIcon />}
             component={Link}
             href="/menus"
-            className="text-secondary"
+            className="text-secondary hover:text-gray"
           />
           <BottomNavigationAction
             icon={<HomeIcon />}
             component={Link}
             href="/"
-            className="text-secondary"
+            className="text-secondary hover:text-gray"
           />
           <BottomNavigationAction
             icon={<ListAltIcon />}
             component={Link}
             href="/history"
-            className="text-secondary"
+            className="text-secondary hover:text-gray"
           />
           <BottomNavigationAction
             icon={<PersonIcon />}
             component={Link}
             href="/profile"
-            className="text-secondary"
+            className="text-secondary hover:text-gray"
           />
         </BottomNavigation>
       </ThemeProvider>
