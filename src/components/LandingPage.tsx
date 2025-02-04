@@ -1,10 +1,8 @@
 import { useState } from "react";
 import Carousel from "react-material-ui-carousel";
-
 import Image from "next/image";
 import Link from "next/link";
-
-import { Button } from "@mui/material";
+import { Button, Typography, Box } from "@mui/material";
 
 export default function LandingPage() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -60,25 +58,25 @@ export default function LandingPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center bg-gradient-to-br from-primary to-primary/80 relative">
-      {/* LOGO di LUAR CARD */}
-      <div className="absolute top-10 flex flex-col items-center">
+      <Box className="relative z-10 flex justify-center">
         <Image
           src="/images/PreciFoodLogo.png"
-          alt="PreciFood Logo"
-          width={150} // Sesuaikan ukuran logo
-          height={200}
-          className="rounded-full shadow-lg"
+          alt="Logo"
+          width={200}
+          height={100}
         />
-        {/* 
-        TAGLINE DI ANTARA LOGO DAN CARD
-        <p className="mt-4 text-white text-lg font-semibold animate-fade-in">
-          Untuk Pilihan Makanan Spesifik Restoran yang Lebih!
-        </p> */}
-      </div>
+      </Box>
 
-      {/* Card utama */}
-      <div className="max-w-lg w-full bg-white rounded-3xl shadow-xl p-8 transition-transform transform hover:scale-105">
-        {/* Carousel */}
+      <Typography
+        variant="body1"
+        color="white"
+        className="mt-2  mb-5 text-center italic"
+      >
+        Untuk Restoran Spesifik
+      </Typography>
+
+
+      <div className="max-w-lg w-full bg-white rounded-3xl shadow-xl p-8">
         <Carousel
           index={activeIndex}
           onChange={(index) => setActiveIndex(index ?? 0)}
@@ -106,7 +104,6 @@ export default function LandingPage() {
                 {slide.description}
               </p>
 
-              {/* Tombol "Get Started" hanya untuk Slide 1 */}
               {index === 0 && (
                 <Button
                   variant="contained"
@@ -118,7 +115,6 @@ export default function LandingPage() {
                 </Button>
               )}
 
-              {/* Tombol "Next" untuk Slide 2, 3 & 4 */}
               {(index === 1 || index === 2 || index === 3) && (
                 <Button
                   variant="contained"
@@ -130,7 +126,6 @@ export default function LandingPage() {
                 </Button>
               )}
 
-              {/* Tombol Login & Register hanya pada slide terakhir */}
               {slide.buttons && (
                 <div className="mt-6 flex flex-col space-y-4 w-full">
                   {slide.buttons.map((button, btnIndex) => (
