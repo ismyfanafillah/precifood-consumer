@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Carousel from "react-material-ui-carousel";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Button, Typography, Box } from "@mui/material";
+
+import { Box, Button, Typography } from "@mui/material";
 
 export default function LandingPage() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -75,7 +77,6 @@ export default function LandingPage() {
         Untuk Restoran Spesifik
       </Typography>
 
-
       <div className="max-w-lg w-full bg-white rounded-3xl shadow-xl p-8">
         <Carousel
           index={activeIndex}
@@ -86,7 +87,10 @@ export default function LandingPage() {
           animation="slide"
         >
           {slides.map((slide, index) => (
-            <div key={index} className="flex flex-col items-center p-6">
+            <div
+              key={index}
+              className="flex flex-col items-center p-6 h-[36rem] justify-between"
+            >
               <div className="relative w-64 h-64 bg-gray-200 rounded-2xl shadow-lg overflow-hidden">
                 <Image
                   src={slide.image}
@@ -98,55 +102,55 @@ export default function LandingPage() {
                 />
               </div>
 
-              <h2 className="text-2xl font-extrabold mt-6 text-gray-900">
-                {slide.title}
-              </h2>
-              <p className="text-gray-600 text-base mt-3">
-                {slide.description}
-              </p>
+              <div>
+                <h2 className="text-2xl font-extrabold mt-6 text-gray-900">
+                  {slide.title}
+                </h2>
+                <p className="text-gray-600 text-base mt-3">
+                  {slide.description}
+                </p>
+                {index === 0 && (
+                  <Button
+                    variant="contained"
+                    className="mt-6 w-full rounded-full"
+                    color="primary"
+                    onClick={() => setActiveIndex(1)}
+                  >
+                    {slide.buttonText}
+                  </Button>
+                )}
+                {(index === 1 || index === 2 || index === 3) && (
+                  <Button
+                    variant="contained"
+                    className="mt-6 w-full rounded-full"
+                    color="primary"
+                    onClick={() => setActiveIndex(index + 1)}
+                  >
+                    {slide.buttonText}
+                  </Button>
+                )}
 
-              {index === 0 && (
-                <Button
-                  variant="contained"
-                  className="mt-6 w-full rounded-full"
-                  color="primary"
-                  onClick={() => setActiveIndex(1)}
-                >
-                  {slide.buttonText}
-                </Button>
-              )}
-
-              {(index === 1 || index === 2 || index === 3) && (
-                <Button
-                  variant="contained"
-                  className="mt-6 w-full rounded-full"
-                  color="primary"
-                  onClick={() => setActiveIndex(index + 1)}
-                >
-                  {slide.buttonText}
-                </Button>
-              )}
-
-              {slide.buttons && (
-                <div className="mt-6 flex flex-col space-y-4 w-full">
-                  {slide.buttons.map((button, btnIndex) => (
-                    <Link key={btnIndex} href={button.link} passHref>
-                      <Button
-                        variant={button.variant}
-                        fullWidth
-                        className="rounded-full border border-primary text-primary hover:bg-gray-300 hover:text-primary transition-all"
-                        style={
-                          button.variant === "contained"
-                            ? { backgroundColor: "primary", color: "white" }
-                            : {}
-                        }
-                      >
-                        {button.text}
-                      </Button>
-                    </Link>
-                  ))}
-                </div>
-              )}
+                {slide.buttons && (
+                  <div className="mt-6 flex flex-col space-y-4 w-full">
+                    {slide.buttons.map((button, btnIndex) => (
+                      <Link key={btnIndex} href={button.link} passHref>
+                        <Button
+                          variant={button.variant}
+                          fullWidth
+                          className="rounded-full border border-primary text-primary hover:bg-gray-300 hover:text-primary transition-all"
+                          style={
+                            button.variant === "contained"
+                              ? { backgroundColor: "primary", color: "white" }
+                              : {}
+                          }
+                        >
+                          {button.text}
+                        </Button>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </Carousel>
