@@ -101,7 +101,7 @@ export default function UpdateDataDialog() {
             setValueAs: (value) => +value,
           })}
           required
-          label="Berat Badan"
+          label="Berat Badan (kg)"
           type="number"
           name="weight"
           variant="outlined"
@@ -120,7 +120,7 @@ export default function UpdateDataDialog() {
             setValueAs: (value) => +value,
           })}
           required
-          label="Tinggi Badan"
+          label="Tinggi Badan (cm)"
           name="height"
           type="number"
           variant="outlined"
@@ -154,7 +154,7 @@ export default function UpdateDataDialog() {
           }}
         >
           <MenuItem value="">
-            <em>Select Medical Condition</em>
+            <em>Pilih Kondisi Riwayat Penyakit</em>
           </MenuItem>
           <MenuItem value="no_history">Tidak Ada</MenuItem>
           <MenuItem value="cardiovascular">Jantung Koroner/Kolesterol</MenuItem>

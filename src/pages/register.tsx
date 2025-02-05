@@ -169,6 +169,40 @@ export default function Register() {
 
           <Box className="mb-3">
             <TextField
+              {...register("weight", {
+                setValueAs: (value) => +value,
+              })}
+              required
+              id="weight"
+              label="Berat Badan (kg)"
+              type="number"
+              className="w-full"
+              size="small"
+              placeholder="Masukkan Berat Badan"
+              error={!!errors.weight}
+              helperText={errors.weight?.message}
+            />
+          </Box>
+
+          <Box className="mb-3">
+            <TextField
+              {...register("height", {
+                setValueAs: (value) => +value,
+              })}
+              required
+              id="height"
+              label="Tinggi Badan (cm)"
+              type="number"
+              className="w-full"
+              size="small"
+              placeholder="Mausukkan Tinggi Badan"
+              error={!!errors.height}
+              helperText={errors.height?.message}
+            />
+          </Box>
+
+          <Box className="mb-3">
+            <TextField
               {...register("email")}
               required
               label="Email"
@@ -241,7 +275,7 @@ export default function Register() {
               value={watch("medical_history") || ""}
             >
               <MenuItem value="">
-                <em>Pilih Riwayat Penyakit</em>
+                <em>Pilih Kondisi Riwayat Penyakit</em>
               </MenuItem>
               <MenuItem value="no_history">Tidak Ada</MenuItem>
               <MenuItem value="cardiovascular">
