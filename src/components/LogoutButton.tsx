@@ -19,7 +19,7 @@ export function LogoutButton() {
     router.push("/login");
   };
   return (
-    <div className="flex flex-col items-center w-full max-w-sm">
+    <div className="flex flex-col items-center w-full max-w-md mx-auto space-y-4 mt-6">
       <Button
         variant="outlined"
         onClick={logout}

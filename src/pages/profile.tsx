@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-
 import Image from "next/image";
-
 import dayjs from "dayjs";
 import { z } from "zod";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Divider, Paper, Typography } from "@mui/material";
 
@@ -67,32 +64,24 @@ export default function Profile() {
         </Typography>
       </Box>
 
-      {/* Divider */}
       <Divider className="my-4" />
 
-      {/* Card untuk Form Profil */}
       <Paper className="w-full max-w-md p-5 mx-auto bg-white rounded-lg shadow-lg">
         <Box className="flex justify-center">
-          <Image
-            src="/images/edit.png"
-            alt="Edit Profil"
-            width={200}
-            height={100}
-          />
+          <Image src="/images/edit.png" alt="Edit Profil" width={200} height={100} />
         </Box>
 
         <Box className="mb-6">
           <ProfileDataForm form={profileForm} profile={profile} />
         </Box>
 
-        {/* Change Email & Password dengan Spacing yang Lebih Baik */}
         <Box className="space-y-4">
           <ChangeEmailDialog profile={profile} />
           <ChangePasswordDialog />
         </Box>
       </Paper>
 
-      <Box className="flex flex-col items-center w-full max-w-sm space-y-4 justify-end">
+      <Box className="flex flex-col items-center w-full max-w-md mx-auto space-y-4 mt-6">
         <Button
           variant="contained"
           onClick={handleUpdate}
