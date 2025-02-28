@@ -101,7 +101,7 @@ export default function ChangeEmailDialog({
             className="mb-4"
             {...register("new_email")}
             required
-            label="Email baru"
+            label="Email"
             type="email"
             size="small"
             name="new_email"
