@@ -54,7 +54,6 @@ export default function ChangePasswordDialog() {
     <>
       <div className="flex items-center justify-between w-full">
         <TextField
-          {...register("new_password")}
           required
           disabled
           id="password"

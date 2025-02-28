@@ -115,7 +115,7 @@ export default function ChangeEmailDialog({
             {...register("password")}
             required
             id="password"
-            label="Kata sandi"
+            label="Password"
             size="small"
             type={showPassword ? "text" : "password"} // Mengubah tipe berdasarkan state
             className="w-full"
