@@ -4,8 +4,8 @@ import Image from "next/image";
 
 // import InfoIcon from "@mui/icons-material/Info";
 import { Alert, AlertTitle, Box, Typography } from "@mui/material";
-// import { IconButton, Link } from "@mui/material";
 
+// import { IconButton, Link } from "@mui/material";
 import LayoutWithBottomNav from "@/components/LayoutWithBottomNav";
 import UpdateDataDialog from "@/components/UpdateDataDialog";
 import { GenerateRecommendationButton } from "@/components/recommendation/GenerateRecommendationButton";
@@ -30,25 +30,8 @@ export default function Home() {
     <LayoutWithBottomNav>
       <div className="w-full h-auto">
         <div className="absolute top-0 left-0 w-full h-60 bg-primary shadow-md"></div>
-        {/* <div className="absolute top-4 right-4">
-          <Link href="/information">
-            <IconButton
-              aria-label="Information"
-              className="bg-white p-0 hover:text-secondary active:text-secondary transition-colors duration-300"
-            >
-              <InfoIcon
-                fontSize="medium"
-                className="text-primary hover:text-secondary active:text-secondary transition-colors duration-300"
-              />
-            </IconButton>
-          </Link>
-        </div> */}
 
         <div className="relative text-center">
-          {/* <h1 className="text-3xl font-bold text-white">PreciFood</h1>
-          <p className="text-secondary text-xs italic">
-            For Specific Restaurant
-          </p> */}
           <Box className="relative z-10 flex justify-center">
             <Image
               src="/images/PreciFoodLogo.png"
@@ -61,7 +44,7 @@ export default function Home() {
           <Typography
             variant="body1"
             color="white"
-            className="mt-2 text-center italic text-xs" 
+            className="mt-2 text-center italic text-xs"
           >
             Rekomendasi pilihan menu yang lebih baik untuk Anda!
           </Typography>
@@ -137,14 +120,12 @@ export default function Home() {
         <UpdateDataDialog />
       </div>
       <div>
-        {/* Skeleton Placeholder Jika Sedang Generating */}
         {recommendation?.status.is_generating && (
           <div>
             <MenuListSkeleton />
           </div>
         )}
 
-        {/* Menampilkan Recommendation List Hanya Jika Tidak Generating */}
         {!recommendation?.status.is_generating &&
           recommendation &&
           recommendation.recommendations?.length > 0 && (

@@ -4,12 +4,15 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  IconButton,
+  InputAdornment,
   TextField,
 } from "@mui/material";
 
@@ -19,6 +22,10 @@ import { ChangePasswordSchema } from "@/validations/updateData";
 
 export default function ChangePasswordDialog() {
   const [open, setOpen] = useState(false);
+
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const changePasswordForm = useForm<z.infer<typeof ChangePasswordSchema>>({
     resolver: zodResolver(ChangePasswordSchema),
@@ -33,7 +40,7 @@ export default function ChangePasswordDialog() {
   const handleUpdate = handleSubmit(async (data) => {
     try {
       await putDataAuthenticated("/auth/password", data);
-      openToast({ type: "success", message: "Data berhasil diperbarui" });
+      openToast({ type: "success", message: "Password berhasil diperbarui" });
       setOpen(false);
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -47,11 +54,12 @@ export default function ChangePasswordDialog() {
     <>
       <div className="flex items-center justify-between w-full">
         <TextField
+          {...register("new_password")}
           required
           disabled
           id="password"
           type="password"
-          label="Kata Sandi"
+          label="Password"
           size="small"
           className="w-full mr-4"
           value="password"
@@ -64,9 +72,8 @@ export default function ChangePasswordDialog() {
         <Button
           size="small"
           onClick={() => setOpen(true)}
-          variant="outlined"
-          // color="secondary"
-          className="h-10 px-3 text-xs text-primary border-2 border-primary"
+          variant="contained"
+          className="h-10 px-3 text-xs text-primary bg-primary/20"
         >
           Ganti Password
         </Button>
@@ -84,7 +91,7 @@ export default function ChangePasswordDialog() {
             {...register("old_password")}
             required
             label="Password saat ini"
-            type="password"
+            type={showOldPassword ? "text" : "password"}
             size="small"
             name="old_password"
             variant="outlined"
@@ -92,12 +99,24 @@ export default function ChangePasswordDialog() {
             margin="dense"
             error={!!errors.old_password}
             helperText={errors.old_password?.message}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => setShowOldPassword(!showOldPassword)}
+                  >
+                    {showOldPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
+
           <TextField
             {...register("new_password")}
             required
             label="Password baru"
-            type="password"
+            type={showNewPassword ? "text" : "password"}
             size="small"
             name="new_password"
             variant="outlined"
@@ -105,12 +124,24 @@ export default function ChangePasswordDialog() {
             margin="dense"
             error={!!errors.new_password}
             helperText={errors.new_password?.message}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                  >
+                    {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
+
           <TextField
             {...register("password_confirmation")}
             required
             label="Konfirmasi password"
-            type="password"
+            type={showConfirmPassword ? "text" : "password"}
             size="small"
             name="password_confirmation"
             variant="outlined"
@@ -118,8 +149,20 @@ export default function ChangePasswordDialog() {
             margin="dense"
             error={!!errors.password_confirmation}
             helperText={errors.password_confirmation?.message}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
         </DialogContent>
+
         <DialogActions className="pb-8 pt-0 px-6">
           <Button onClick={() => setOpen(false)}>Batal</Button>
           <Button variant="contained" onClick={handleUpdate}>

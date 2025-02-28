@@ -60,7 +60,6 @@ export default function Register() {
 
   return (
     <Box className="flex flex-col items-center justify-center min-h-screen bg-primary px-4">
-      {/* Logo */}
       <Box className="relative z-10 flex justify-center mt-6">
         <Image
           src="/images/PreciFoodLogo.png"
@@ -78,12 +77,10 @@ export default function Register() {
         Untuk Restoran Spesifik
       </Typography>
 
-      {/* Card Register */}
       <Paper
         elevation={4}
-        className="relative z-10 w-full max-w-sm p-4 mt-3 bg-white rounded-lg shadow-lg"
+        className="relative z-10 w-full max-w-sm p-4 mt-3 bg-white rounded-lg shadow-lg mb-8"
       >
-        {/* Back Button */}
         <Box className="flex items-center mb-3">
           <IconButton onClick={() => router.push("/")}>
             <ArrowBackIcon />
@@ -102,7 +99,6 @@ export default function Register() {
           />
         </Box>
 
-        {/* Page Title */}
         <Typography variant="h6" className="text-center font-bold mt-2">
           Daftar Akun
         </Typography>
@@ -112,7 +108,6 @@ export default function Register() {
           Daftar Sekarang!
         </Typography>
 
-        {/* Register Form */}
         <form onSubmit={signup} className="mt-3">
           <Box className="mb-3">
             <TextField
@@ -302,7 +297,6 @@ export default function Register() {
           </Alert>
         )}
 
-        {/* Login Link */}
         <Typography variant="body2" className="text-center mt-3">
           Sudah Punya Akun?{" "}
           <Link href="/login" className="font-bold">

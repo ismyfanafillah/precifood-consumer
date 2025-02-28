@@ -85,7 +85,7 @@ export default function Profile() {
         <Button
           variant="contained"
           onClick={handleUpdate}
-          className="w-full border-2 border-primary bg-primary text-white rounded-full py-3 font-semibold hover:bg-gray-300 hover:text-primary"
+          className="w-full border-2 border-primary bg-primary text-white rounded-full py-3 font-semibold hover:bg-primary/50 hover:text-primary"
         >
           Simpan
         </Button>

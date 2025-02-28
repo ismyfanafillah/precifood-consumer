@@ -46,7 +46,7 @@ export function ConfirmationDialog() {
     <Dialog open={open} onClose={() => handleClose(false)}>
       <DialogTitle
         id="alert-dialog-title"
-        className="text-lg font-semibold text-gray-800"
+        className="text-lg font-semibold text-center text-gray-800"
       >
         {title}
       </DialogTitle>

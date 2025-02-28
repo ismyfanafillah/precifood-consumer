@@ -21,10 +21,9 @@ export function LogoutButton() {
   return (
     <div className="flex flex-col items-center w-full max-w-md mx-auto space-y-4 mt-6">
       <Button
-        variant="outlined"
+        variant="contained"
         onClick={logout}
-        // color="error"
-        className="w-full border-2 border-error text-error rounded-full py-3 font-semibold hover:bg-error  hover:text-white"
+        className="w-full border-2 border-error bg-error/10 text-error rounded-full py-3 font-semibold hover:bg-error/50 hover:text-white"
       >
         Keluar
       </Button>

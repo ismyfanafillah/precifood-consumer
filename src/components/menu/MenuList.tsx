@@ -41,9 +41,20 @@ export default function MenuList({ menulist }: { menulist: Menu[] }) {
         onTogglePriceOrder={togglePriceOrder}
         priceOrderState={priceOrderState}
       />
-      {filteredMenuList.map((menu) => (
-        <MenuCard menu={menu} key={menu.id} />
-      ))}
+      {filteredMenuList.length > 0 ? (
+        filteredMenuList.map((menu) => <MenuCard menu={menu} key={menu.id} />)
+      ) : (
+        <div className="flex flex-col justify-center items-center h-64 text-center text-gray-500">
+          <p className="text-base font-semibold">
+            Oops! <br />
+            Sepertinya belum ada menu di kategori ini
+          </p>
+          <p className="text-sm">
+            Kami akan segera menambahkannya. <br />
+            Silakan cek kembali nanti!
+          </p>
+        </div>
+      )}
     </div>
   );
 }

@@ -27,17 +27,21 @@ export default function Menus() {
     <LayoutWithBottomNav>
       <div className="mb-4 text-center">
         <h1 className="text-2xl font-bold">Menu</h1>
-        <hr className="border-t-2 border-primary mt-2 w-24 mx-auto"  />
+        <hr className="border-t-2 border-primary mt-2 w-24 mx-auto" />
       </div>
       <Search
         onSearch={handleSearch}
         onCancelSearch={handleCancelSearch}
         isSearchActive={isSearchActive}
       />
-      {errorMessage ||
-        (menusError && (
-          <Alert severity="error">{errorMessage || menusError}</Alert>
-        ))}
+      {(errorMessage || menusError) && (
+        <div className="flex flex-col items-center mt-4">
+          <Alert severity="error" className="w-full max-w-sm text-center">
+            <strong>Oops!</strong> {errorMessage || menusError}. <br /> 
+          </Alert>
+        </div>
+      )}
+
       {isLoading || (isMenusLoading && <MenuListSkeleton />)}
       {isSearchActive && searchedMenus && searchedMenus.length > 0 && (
         <MenuList menulist={searchedMenus} />
