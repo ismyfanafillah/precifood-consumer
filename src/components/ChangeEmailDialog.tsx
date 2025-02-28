@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+
 import { z } from "zod";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -9,10 +11,7 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
-  IconButton,
-  InputAdornment,
 } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import { openToast } from "@/components/Toast";
 import { Profile } from "@/interfaces/profile";
@@ -25,7 +24,6 @@ export default function ChangeEmailDialog({
   profile: Profile | null;
 }) {
   const [open, setOpen] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // State untuk visibilitas password
 
   const changeEmailForm = useForm<z.infer<typeof ChangeEmailSchema>>({
     resolver: zodResolver(ChangeEmailSchema),
@@ -52,7 +50,7 @@ export default function ChangeEmailDialog({
   });
 
   const handleDialogOpen = () => {
-    reset();
+    reset(); 
     setOpen(true);
   };
 
@@ -115,21 +113,11 @@ export default function ChangeEmailDialog({
             {...register("password")}
             required
             id="password"
-            label="Password"
+            label="Kata sandi"
             size="small"
-            type={showPassword ? "text" : "password"} // Mengubah tipe berdasarkan state
+            type="password"
             className="w-full"
             error={!!errors.password}
-            helperText={errors.password?.message}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={() => setShowPassword(!showPassword)}>
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
           />
         </DialogContent>
         <DialogActions className="pb-8 pt-0 px-6">
