@@ -137,7 +137,7 @@ export default function LandingPage() {
                         <Button
                           variant={button.variant}
                           fullWidth
-                          className="rounded-full border border-primary text-primary hover:bg-gray-300 hover:text-primary transition-all"
+                          className="rounded-full border border-primary text-primary hover:bg-primary/50 hover:text-primary transition-all"
                           style={
                             button.variant === "contained"
                               ? { backgroundColor: "primary", color: "white" }
