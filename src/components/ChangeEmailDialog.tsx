@@ -11,10 +11,7 @@ import { useState } from "react";
    DialogContent,
    DialogTitle,
    TextField,
-  IconButton,
-  InputAdornment,
  } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
  
  import { openToast } from "@/components/Toast";
  import { Profile } from "@/interfaces/profile";
@@ -27,7 +24,6 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
    profile: Profile | null;
  }) {
    const [open, setOpen] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
  
    const changeEmailForm = useForm<z.infer<typeof ChangeEmailSchema>>({
      resolver: zodResolver(ChangeEmailSchema),
@@ -54,7 +50,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
    });
  
    const handleDialogOpen = () => {
-     reset();
+     reset(); // Reset nilai formulir ke nilai default
      setOpen(true);
    };
  
@@ -85,7 +81,8 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
            size="small"
            onClick={handleDialogOpen}
            variant="contained"
-          className="h-10 px-6 whitespace-nowrap text-xs text-primary bg-primary/20"
+           color="secondary"
+           className="h-10 px-6 whitespace-nowrap text-xs text-primary"
          >
            Ganti Email
          </Button>
@@ -119,26 +116,17 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
              id="password"
              label="Password"
              size="small"
-            type={showPassword ? "text" : "password"} 
+             type="password"
              className="w-full"
              error={!!errors.password}
-            helperText={errors.password?.message}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={() => setShowPassword(!showPassword)}>
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
            />
          </DialogContent>
-         <DialogActions className="justify-center pb-8 pt-0">
-           <Button onClick={handleUpdate} variant="contained">
-             Update
-           </Button>
-         </DialogActions>
+         <DialogActions className="pb-8 pt-0 px-6">
+          <Button onClick={() => setOpen(false)}>Batal</Button>
+          <Button variant="contained" onClick={handleUpdate}>
+            Simpan
+          </Button>
+        </DialogActions>
        </Dialog>
      </>
    );
