@@ -57,6 +57,7 @@ export default function ChangeEmailDialog({
   };
 
   const handleDialogClose = () => {
+    reset();
     setOpen(false);
   };
 
@@ -132,7 +133,7 @@ export default function ChangeEmailDialog({
           />
         </DialogContent>
         <DialogActions className="pb-8 pt-0 px-6">
-          <Button onClick={() => setOpen(false)}>Batal</Button>
+          <Button onClick={handleDialogClose}>Batal</Button>
           <Button variant="contained" onClick={handleUpdate}>
             Simpan
           </Button>
