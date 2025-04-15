@@ -10,13 +10,6 @@ export interface User {
   registered_at: string;
 }
 
-// export interface MedicalHistory {
-//   cardiovascular: boolean;
-//   diabetes: boolean;
-//   hypertension: boolean;
-//   no_history: boolean;
-// }
-
 export interface PersonalInformation {
   age: number;
   birth: string;

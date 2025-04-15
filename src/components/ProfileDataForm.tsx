@@ -44,6 +44,7 @@ export default function ProfileDataForm({
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           label="Tanggal Lahir"
+          format="DD/MM/YYYY"
           disabled
           value={profile ? dayjs(profile.personal_information.birth) : null}
           slotProps={{

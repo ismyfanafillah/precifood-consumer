@@ -2,10 +2,8 @@ import Carousel from "react-material-ui-carousel";
 
 import Image from "next/image";
 
-// import InfoIcon from "@mui/icons-material/Info";
 import { Alert, AlertTitle, Box, Typography } from "@mui/material";
 
-// import { IconButton, Link } from "@mui/material";
 import LayoutWithBottomNav from "@/components/LayoutWithBottomNav";
 import UpdateDataDialog from "@/components/UpdateDataDialog";
 import { GenerateRecommendationButton } from "@/components/recommendation/GenerateRecommendationButton";

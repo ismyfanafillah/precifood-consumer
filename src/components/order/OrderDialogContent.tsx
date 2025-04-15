@@ -42,7 +42,7 @@ export default function OrderDialogContent({
         type: "success",
         message: "Pesanan berhasil dibatalkan!",
       });
-      onDelete(); // Inform the parent component to remove the order
+      onDelete(); 
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error.message);

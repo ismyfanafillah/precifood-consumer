@@ -49,6 +49,3 @@ export const useGetMenus = () => useFetchData<Menu[]>(GET_MENUS);
 export const useGetProfile = () => useFetchData<Profile>(PROFILE);
 export const useGetRestaurants = () => useFetchData<ListRestaurant[]>(GET_RESTAURANTS);
 export const useGetRestaurantProfile = () => useFetchData<Restaurant>(GET_RESTAURANT_PROFILE);
-
-// export const GET_RECOMMENDATIONS: Endpoint = () => `/restaurants/${getCookies("restaurant_id")}/recommendations`;
-// export const GET_RECOMMENDATIONS = `/restaurants/${getCookies("restaurant_id")}/recommendations`;

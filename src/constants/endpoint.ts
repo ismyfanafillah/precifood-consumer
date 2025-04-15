@@ -9,5 +9,3 @@ export const GET_RECOMMENDATIONS: Endpoint = () => `/restaurants/${getCookies("r
 export const GET_MENUS: Endpoint = () => `/restaurants/${getCookies("restaurant_id")}/menus`;
 export const GET_RESTAURANT_PROFILE: Endpoint = () => `/users/restaurants/${getCookies("restaurant_id")}`;
 export const SEARCH_MENUS: Endpoint = (query?: string) => `/restaurants/${getCookies("restaurant_id")}/menus/search?name=${query}`;
-
-// export const GET_RECOMMENDATIONS = `/restaurants/${getCookies("restaurant_id")}/recommendations`;

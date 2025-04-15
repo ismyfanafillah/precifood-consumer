@@ -74,12 +74,10 @@ export default function Login() {
         Untuk Restoran Spesifik
       </Typography>
 
-      {/* Card Login */}
       <Paper
         elevation={4}
         className="relative z-10 w-full max-w-sm p-5 mt-6 bg-white rounded-lg shadow-lg"
       >
-        {/* Back Button */}
         <Box className="flex items-center mt-2">
           <IconButton onClick={() => router.push("/")}>
             <ArrowBackIcon />
@@ -98,7 +96,6 @@ export default function Login() {
           />
         </Box>
 
-        {/* Page Title */}
         <Typography variant="h5" className="text-center font-bold mt-2">
           Masuk Akun
         </Typography>
@@ -107,7 +104,6 @@ export default function Login() {
           makananmu yang lebih baik!
         </Typography>
 
-        {/* Login Form */}
         <form onSubmit={login} className="mt-4">
           <Box className="mb-3">
             <TextField
@@ -138,7 +134,6 @@ export default function Login() {
             />
           </Box>
 
-          {/* Pilihan Restoran */}
           <Box className="mb-3">
             <TextField
               select
@@ -179,7 +174,6 @@ export default function Login() {
           </Alert>
         )}
 
-        {/* Register Link */}
         <Typography variant="body2" className="text-center mt-3">
           Tidak Punya Akun?{" "}
           <Link href="/register" className="font-bold">

@@ -26,7 +26,6 @@ export default function RecommendationDialogContent({
 }) {
   return (
     (<DialogContent className="space-y-6">
-      {/* Carousel */}
       <Carousel
         indicators={false}
         navButtonsAlwaysVisible
@@ -54,7 +53,6 @@ export default function RecommendationDialogContent({
           </div>
         ))}
       </Carousel>
-      {/* Nutrition Summary */}
       <div className="space-y-4">
         <Typography
           variant="subtitle2"
@@ -76,7 +74,6 @@ export default function RecommendationDialogContent({
           </div>
         </Typography>
       </div>
-      {/* Detail Menu */}
       <Typography
         variant="subtitle1"
         className="text-lg font-semibold text-gray-800 mt-4"
@@ -107,7 +104,6 @@ export default function RecommendationDialogContent({
           </div>
         ))}
       </div>
-      {/* Footer */}
       <div className="flex justify-between items-center mt-6 border-t pt-4">
         <Typography
           variant="body1"

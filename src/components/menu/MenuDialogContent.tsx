@@ -15,7 +15,6 @@ export default function MenuDialogContent({ menu }: { menu: Menu }) {
       >
         {menu.name}
       </Typography>
-      {/* Gambar Menu */}
       <div className="w-full flex justify-center relative">
         <Image
           src={menu.image_url}
@@ -28,7 +27,6 @@ export default function MenuDialogContent({ menu }: { menu: Menu }) {
             height: "auto"
           }} />
       </div>
-      {/* Deskripsi Menu */}
       <div>
         <Typography variant="subtitle1" className="text-sm text-gray-600 mt-1">
           {menu.description}

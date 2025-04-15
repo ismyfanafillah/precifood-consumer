@@ -127,6 +127,7 @@ export default function Register() {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Tanggal Lahir"
+                format="DD/MM/YYYY"
                 onChange={handleDateChange}
                 slotProps={{
                   textField: {
